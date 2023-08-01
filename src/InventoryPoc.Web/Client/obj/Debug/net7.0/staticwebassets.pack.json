@@ -1,0 +1,269 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/bin/Debug/net7.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/obj/Debug/net7.0/build-gz/WVngoj46.gz",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/obj/Debug/net7.0/scopedcss/bundle/InventoryPoc.Web.Client.styles.css",
+      "PackagePath": "staticwebassets/InventoryPoc.Web.Client.styles.css"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/Acme-Grocer.jfif",
+      "PackagePath": "staticwebassets/Acme-Grocer.jfif"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/acme-grocer.png",
+      "PackagePath": "staticwebassets/acme-grocer.png"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/assistant.jfif",
+      "PackagePath": "staticwebassets/assistant.jfif"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/FONT-LICENSE",
+      "PackagePath": "staticwebassets/css/open-iconic"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/ICON-LICENSE",
+      "PackagePath": "staticwebassets/css/open-iconic"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/README.md",
+      "PackagePath": "staticwebassets/css/open-iconic/README.md"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/open-iconic/font/css/open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.eot",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.eot"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.otf",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.otf"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.svg",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.svg"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.ttf"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.woff",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.woff"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/icon-192.png",
+      "PackagePath": "staticwebassets/icon-192.png"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/baby-spinach.webp",
+      "PackagePath": "staticwebassets/images/baby-spinach.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/bakery-chocolate-cake.webp",
+      "PackagePath": "staticwebassets/images/bakery-chocolate-cake.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/baking-powder.webp",
+      "PackagePath": "staticwebassets/images/baking-powder.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/baking-soda.webp",
+      "PackagePath": "staticwebassets/images/baking-soda.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/betty-crocker-super-moist-chocolate-fudge-cake.jfif",
+      "PackagePath": "staticwebassets/images/betty-crocker-super-moist-chocolate-fudge-cake.jfif"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/black-pepper.webp",
+      "PackagePath": "staticwebassets/images/black-pepper.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/chicken-sausage.webp",
+      "PackagePath": "staticwebassets/images/chicken-sausage.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/chocolate-chip-cookies.webp",
+      "PackagePath": "staticwebassets/images/chocolate-chip-cookies.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/chocolate-chips.webp",
+      "PackagePath": "staticwebassets/images/chocolate-chips.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/cilantro.webp",
+      "PackagePath": "staticwebassets/images/cilantro.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/corn.webp",
+      "PackagePath": "staticwebassets/images/corn.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/diced-canned-tomatoes.webp",
+      "PackagePath": "staticwebassets/images/diced-canned-tomatoes.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/eggs.webp",
+      "PackagePath": "staticwebassets/images/eggs.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/espresso-powder.webp",
+      "PackagePath": "staticwebassets/images/espresso-powder.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/flour.webp",
+      "PackagePath": "staticwebassets/images/flour.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/fresh-atlantic-salmon.webp",
+      "PackagePath": "staticwebassets/images/fresh-atlantic-salmon.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/garlic.webp",
+      "PackagePath": "staticwebassets/images/garlic.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/ground-cumin.webp",
+      "PackagePath": "staticwebassets/images/ground-cumin.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/honeycrisp-apple.webp",
+      "PackagePath": "staticwebassets/images/honeycrisp-apple.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/jalapeno-pepper.webp",
+      "PackagePath": "staticwebassets/images/jalapeno-pepper.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/jumbo-red-onion.webp",
+      "PackagePath": "staticwebassets/images/jumbo-red-onion.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/kroger-apple-juice.webp",
+      "PackagePath": "staticwebassets/images/kroger-apple-juice.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/large-avocado.webp",
+      "PackagePath": "staticwebassets/images/large-avocado.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/large-lime.webp",
+      "PackagePath": "staticwebassets/images/large-lime.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/mild-cheddar-shredded-cheese.webp",
+      "PackagePath": "staticwebassets/images/mild-cheddar-shredded-cheese.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/milk.webp",
+      "PackagePath": "staticwebassets/images/milk.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/oatmeal-raisin-cookies.webp",
+      "PackagePath": "staticwebassets/images/oatmeal-raisin-cookies.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/olive-oil.webp",
+      "PackagePath": "staticwebassets/images/olive-oil.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/pace-chunky-salsa-medium.webp",
+      "PackagePath": "staticwebassets/images/pace-chunky-salsa-medium.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/pace-chunky-salsa-mild.webp",
+      "PackagePath": "staticwebassets/images/pace-chunky-salsa-mild.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/roma-tomato.webp",
+      "PackagePath": "staticwebassets/images/roma-tomato.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/salt.webp",
+      "PackagePath": "staticwebassets/images/salt.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/smart-way-chili-powder.webp",
+      "PackagePath": "staticwebassets/images/smart-way-chili-powder.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/sugar.webp",
+      "PackagePath": "staticwebassets/images/sugar.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/unsweetened-cocoa-powder.webp",
+      "PackagePath": "staticwebassets/images/unsweetened-cocoa-powder.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/images/vanilla-extract.webp",
+      "PackagePath": "staticwebassets/images/vanilla-extract.webp"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/kroger-assistant.jpg",
+      "PackagePath": "staticwebassets/kroger-assistant.jpg"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/kroger-logo.png",
+      "PackagePath": "staticwebassets/kroger-logo.png"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/man.png",
+      "PackagePath": "staticwebassets/man.png"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/site.js",
+      "PackagePath": "staticwebassets/site.js"
+    },
+    {
+      "Id": "/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Client/wwwroot/woman.png",
+      "PackagePath": "staticwebassets/woman.png"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.InventoryPoc.Web.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.InventoryPoc.Web.Client.props",
+      "PackagePath": "build\\InventoryPoc.Web.Client.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.InventoryPoc.Web.Client.props",
+      "PackagePath": "buildMultiTargeting\\InventoryPoc.Web.Client.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.InventoryPoc.Web.Client.props",
+      "PackagePath": "buildTransitive\\InventoryPoc.Web.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

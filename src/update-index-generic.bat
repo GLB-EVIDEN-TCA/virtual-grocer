@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -H "api-key: JCeorFX5fpklV8vM4k9TGVpNIlKtApqp4O4dVd1CPeAzSeAtauxW" --data @products-generic.json "https://inventory-poc-cog-search.search.windows.net/indexes/products/docs/index?api-version=2020-06-30"

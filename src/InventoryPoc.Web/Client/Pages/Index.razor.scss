@@ -1,0 +1,281 @@
+﻿@media (min-width: 1084px) {
+    .chat-container {
+        padding-right: 5%;
+        padding-left: 5%;
+        width: 90%;
+        box-sizing: content-box
+    }
+}
+
+@media (min-width: 1400px) {
+    .chat-container {
+        max-width: 1600px
+    }
+}
+
+.chat-container {
+    padding: 0 0 10px 0;
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    background-color: #333;
+
+    .chat-messages {
+        .chat-message {
+            padding: 10px 25px;
+            margin: 10px 0 10px 0;
+
+            .clear {
+                clear: both;
+            }
+
+            .message-details {
+                float: left;
+                width: 90%;
+
+                p {
+                    &.precontent {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .inventorycontent, .recipecontent {
+                    font-size: 1.2em;
+                    font-weight: bold;
+
+                    button {
+                        &.toggle-recipes {
+                            font-size: 0.8em;
+                            border-radius: 50px;
+                            padding: 5px 10px;
+                            border: none;
+                            color: #8ec7db;
+                            cursor: pointer;
+                            background-color: transparent;
+                        }
+                    }
+                }
+
+                .recipes {
+                    .recipe {
+                        margin-bottom: 10px;
+
+                        .recipe-name {
+                            font-weight: bold;
+                            font-size: 1.1em;
+
+                            .recipe-url {
+                                font-weight: normal;
+                                font-size: 0.7em;
+
+                                a {
+                                    color: #8ec7db;
+                                }
+                            }
+                        }
+
+                        .recipe-directions {
+                            font-weight: bold;
+                            margin-top: 10px;
+
+                            .recipe-direction {
+                                font-size: 0.8em;
+                                font-weight: normal;
+                            }
+                        }
+                    }
+                }
+
+
+
+                .product {
+                    clear: both;
+                    margin-bottom: 10px;
+
+
+                    img {
+
+                        &.message-image {
+                            width: 75px;
+                            height: 75px;
+                            float: left;
+                        }
+                    }
+
+                    .quantity-control {
+                        float: right;
+                        display: flex;
+                        align-items: center;
+                        margin-top:15px;
+                        margin-right: 20px;
+
+                        .quantity-button {
+                            border: none;
+                            background-color: #666;
+                            color: #fff;
+                            padding: 5px;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: #555;
+                            }
+                        }
+
+                        .quantity-input {
+                            width: 30px;
+                            text-align: center;
+                            margin: 0 5px;
+                        }
+                    }
+
+
+                    .product-info {
+                        float: left;
+                        margin: 5px 25px 15px 15px;
+                        font-size: 0.9em;
+
+                        .product-cost {
+                            .dollars {
+                                font-size: 1.6em;
+                                font-weight: bold;
+                            }
+
+                            .cents {
+                                vertical-align: super;
+                                font-size: 0.9em;
+                                margin-left: 1px;
+                            }
+                        }
+
+                        .product-size {
+                            font-size: 0.8em;
+                            color: #ccc;
+                        }
+                    }
+
+                    .add-to-cart-button {
+                        float: right;
+                        border-radius: 50px;
+                        padding: 10px 20px;
+                        border: none;
+                        color: #fff;
+                        background-color: #007BFF; // Change as necessary
+                        cursor: pointer;
+                        margin-top: 10px;
+
+                        &:hover {
+                            background-color: #0056b3; // Change as necessary
+                        }
+                    }
+
+
+                    p {
+                        &.product-name {
+                        }
+
+                        &.product-cost {
+                        }
+                    }
+                }
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+
+            img {
+                &.avatar {
+                    width: 50px;
+                    height: 50px;
+                    float: left;
+                    margin-right: 15px;
+                }
+            }
+
+            color: #fff;
+            border-radius: 20px;
+
+
+            &.user-message {
+                background-color: #333;
+            }
+
+            &.bot-message {
+                background-color: #666;
+            }
+        }
+    }
+
+    .chat-input {
+        width: 100%;
+        padding: 0 10px;
+
+        textarea {
+            max-height: 200px;
+            width: 100%;
+            padding: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            resize: none;
+            border-radius: 20px;
+        }
+
+        .cancel-prompt-button, .send-prompt-button, .clear-prompt-button {
+            border-radius: 50px;
+            padding: 5px 10px;
+            border: none;
+            color: #fff;
+            background-color: #666;
+            cursor: pointer;
+
+            &.disabled {
+                cursor: default;
+                background-color: #000;
+                color: #777;
+
+                &:hover {
+                    background-color: #000;
+                    color: #777;
+                }
+            }
+
+            &:hover {
+                background-color: #555;
+            }
+        }
+
+        .clear-prompt-button {
+            background-color: lightyellow;
+            color: #000;
+
+            &:hover {
+                background-color: palegoldenrod;
+            }
+        }
+
+        .cancel-prompt-button {
+            background-color: transparent;
+        }
+    }
+
+    .scroll-down-arrow {
+        font-size: 24px;
+        color: #333;
+
+        &.visible {
+            display: block;
+        }
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+
+    .hidden {
+        display: none;
+    }
+}

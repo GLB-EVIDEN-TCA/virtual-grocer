@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Joseph Gray\.nuget\packages\microsoft.semantickernel.connectors.ai.openai\0.14.547.1-preview\contentFiles\any\netstandard2.0\Tokenizers\Settings\encoder.json" />
+    <Content Remove="C:\Users\Joseph Gray\.nuget\packages\microsoft.semantickernel.connectors.ai.openai\0.14.547.1-preview\contentFiles\any\netstandard2.0\Tokenizers\Settings\vocab.bpe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+</Project>

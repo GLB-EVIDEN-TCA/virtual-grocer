@@ -1,0 +1,207 @@
+@media (min-width: 1084px) {
+  .chat-container[b-9nu3bjqsy8] {
+    padding-right: 5%;
+    padding-left: 5%;
+    width: 90%;
+    box-sizing: content-box;
+  }
+}
+@media (min-width: 1400px) {
+  .chat-container[b-9nu3bjqsy8] {
+    max-width: 1600px;
+  }
+}
+.chat-container[b-9nu3bjqsy8] {
+  padding: 0 0 10px 0;
+  width: 95%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  background-color: #333;
+}
+.chat-container .chat-messages .chat-message[b-9nu3bjqsy8] {
+  padding: 10px 25px;
+  margin: 10px 0 10px 0;
+  color: #fff;
+  border-radius: 20px;
+}
+.chat-container .chat-messages .chat-message .clear[b-9nu3bjqsy8] {
+  clear: both;
+}
+.chat-container .chat-messages .chat-message .message-details[b-9nu3bjqsy8] {
+  float: left;
+  width: 90%;
+}
+.chat-container .chat-messages .chat-message .message-details p.precontent[b-9nu3bjqsy8] {
+  margin-bottom: 10px;
+}
+.chat-container .chat-messages .chat-message .message-details .inventorycontent[b-9nu3bjqsy8], .chat-container .chat-messages .chat-message .message-details .recipecontent[b-9nu3bjqsy8] {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.chat-container .chat-messages .chat-message .message-details .inventorycontent button.toggle-recipes[b-9nu3bjqsy8], .chat-container .chat-messages .chat-message .message-details .recipecontent button.toggle-recipes[b-9nu3bjqsy8] {
+  font-size: 0.8em;
+  border-radius: 50px;
+  padding: 5px 10px;
+  border: none;
+  color: #8ec7db;
+  cursor: pointer;
+  background-color: transparent;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe[b-9nu3bjqsy8] {
+  margin-bottom: 10px;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-name[b-9nu3bjqsy8] {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-name .recipe-url[b-9nu3bjqsy8] {
+  font-weight: normal;
+  font-size: 0.7em;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-name .recipe-url a[b-9nu3bjqsy8] {
+  color: #8ec7db;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-directions[b-9nu3bjqsy8] {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-directions .recipe-direction[b-9nu3bjqsy8] {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+.chat-container .chat-messages .chat-message .message-details .product[b-9nu3bjqsy8] {
+  clear: both;
+  margin-bottom: 10px;
+}
+.chat-container .chat-messages .chat-message .message-details .product img.message-image[b-9nu3bjqsy8] {
+  width: 75px;
+  height: 75px;
+  float: left;
+}
+.chat-container .chat-messages .chat-message .message-details .product .quantity-control[b-9nu3bjqsy8] {
+  float: right;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-right: 20px;
+}
+.chat-container .chat-messages .chat-message .message-details .product .quantity-control .quantity-button[b-9nu3bjqsy8] {
+  border: none;
+  background-color: #666;
+  color: #fff;
+  padding: 5px;
+  cursor: pointer;
+}
+.chat-container .chat-messages .chat-message .message-details .product .quantity-control .quantity-button:hover[b-9nu3bjqsy8] {
+  background-color: #555;
+}
+.chat-container .chat-messages .chat-message .message-details .product .quantity-control .quantity-input[b-9nu3bjqsy8] {
+  width: 30px;
+  text-align: center;
+  margin: 0 5px;
+}
+.chat-container .chat-messages .chat-message .message-details .product .product-info[b-9nu3bjqsy8] {
+  float: left;
+  margin: 5px 25px 15px 15px;
+  font-size: 0.9em;
+}
+.chat-container .chat-messages .chat-message .message-details .product .product-info .product-cost .dollars[b-9nu3bjqsy8] {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+.chat-container .chat-messages .chat-message .message-details .product .product-info .product-cost .cents[b-9nu3bjqsy8] {
+  vertical-align: super;
+  font-size: 0.9em;
+  margin-left: 1px;
+}
+.chat-container .chat-messages .chat-message .message-details .product .product-info .product-size[b-9nu3bjqsy8] {
+  font-size: 0.8em;
+  color: #ccc;
+}
+.chat-container .chat-messages .chat-message .message-details .product .add-to-cart-button[b-9nu3bjqsy8] {
+  float: right;
+  border-radius: 50px;
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  background-color: #007BFF;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.chat-container .chat-messages .chat-message .message-details .product .add-to-cart-button:hover[b-9nu3bjqsy8] {
+  background-color: #0056b3;
+}
+.chat-container .chat-messages .chat-message p[b-9nu3bjqsy8] {
+  margin-bottom: 0;
+}
+.chat-container .chat-messages .chat-message img.avatar[b-9nu3bjqsy8] {
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-right: 15px;
+}
+.chat-container .chat-messages .chat-message.user-message[b-9nu3bjqsy8] {
+  background-color: #333;
+}
+.chat-container .chat-messages .chat-message.bot-message[b-9nu3bjqsy8] {
+  background-color: #666;
+}
+.chat-container .chat-input[b-9nu3bjqsy8] {
+  width: 100%;
+  padding: 0 10px;
+}
+.chat-container .chat-input textarea[b-9nu3bjqsy8] {
+  max-height: 200px;
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  resize: none;
+  border-radius: 20px;
+}
+.chat-container .chat-input .cancel-prompt-button[b-9nu3bjqsy8], .chat-container .chat-input .send-prompt-button[b-9nu3bjqsy8], .chat-container .chat-input .clear-prompt-button[b-9nu3bjqsy8] {
+  border-radius: 50px;
+  padding: 5px 10px;
+  border: none;
+  color: #fff;
+  background-color: #666;
+  cursor: pointer;
+}
+.chat-container .chat-input .cancel-prompt-button.disabled[b-9nu3bjqsy8], .chat-container .chat-input .send-prompt-button.disabled[b-9nu3bjqsy8], .chat-container .chat-input .clear-prompt-button.disabled[b-9nu3bjqsy8] {
+  cursor: default;
+  background-color: #000;
+  color: #777;
+}
+.chat-container .chat-input .cancel-prompt-button.disabled:hover[b-9nu3bjqsy8], .chat-container .chat-input .send-prompt-button.disabled:hover[b-9nu3bjqsy8], .chat-container .chat-input .clear-prompt-button.disabled:hover[b-9nu3bjqsy8] {
+  background-color: #000;
+  color: #777;
+}
+.chat-container .chat-input .cancel-prompt-button:hover[b-9nu3bjqsy8], .chat-container .chat-input .send-prompt-button:hover[b-9nu3bjqsy8], .chat-container .chat-input .clear-prompt-button:hover[b-9nu3bjqsy8] {
+  background-color: #555;
+}
+.chat-container .chat-input .clear-prompt-button[b-9nu3bjqsy8] {
+  background-color: lightyellow;
+  color: #000;
+}
+.chat-container .chat-input .clear-prompt-button:hover[b-9nu3bjqsy8] {
+  background-color: palegoldenrod;
+}
+.chat-container .chat-input .cancel-prompt-button[b-9nu3bjqsy8] {
+  background-color: transparent;
+}
+.chat-container .scroll-down-arrow[b-9nu3bjqsy8] {
+  font-size: 24px;
+  color: #333;
+}
+.chat-container .scroll-down-arrow.visible[b-9nu3bjqsy8] {
+  display: block;
+}
+.chat-container .scroll-down-arrow.hidden[b-9nu3bjqsy8] {
+  display: none;
+}
+.chat-container .hidden[b-9nu3bjqsy8] {
+  display: none;
+}

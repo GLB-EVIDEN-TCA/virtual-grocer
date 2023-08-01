@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/InventoryPoc.Web.Server.props" />
+</Project>

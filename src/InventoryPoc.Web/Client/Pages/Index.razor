@@ -1,0 +1,260 @@
+﻿@page "/"
+@page "/chat"
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime
+
+<div class="chat-container">
+	<div class="chat-messages">
+		@foreach (var message in _messages)
+		{
+			<div class="chat-message @(message!.IsUser ? "user-message" : "bot-message")">
+				<img src="@(message.IsUser ? "woman.png" : "assistant.jfif")" alt="Avatar" class="avatar @(message.IsUser ? "right" : "left")">
+				<div class="message-details">
+					<p class="precontent @(string.IsNullOrEmpty(message.PreContent)? "hidden":"")">@message.PreContent</p>
+					@if (message.Recipes?.Length > 0)
+					{
+						<p class="recipecontent">
+							Recipes
+
+							<button class="toggle-recipes" @onclick="() => _isRecipesVisible = !_isRecipesVisible">
+								@(_isRecipesVisible ? "Hide" : "Show")
+							</button>
+						</p>
+
+						<div class="recipes @(_isRecipesVisible ? "" : "hidden")">
+
+							@foreach (var recipe in message.Recipes)
+							{
+								<div class="recipe">
+									<div class="recipe-name">
+										@recipe.Name <span class="recipe-url">from <a href="@recipe.Url" target="_blank">@recipe.Url</a></span>
+									</div>
+									<div class="recipe-description">@recipe.Description</div>
+									<div class="recipe-directions">
+										@if (recipe.Directions!.Length > 0)
+										{
+											<p>Directions</p>
+										}
+										@for (var i = 0; i < recipe.Directions.Length; i++)
+										{
+											<div class="recipe-direction">
+												@(i + 1) - @recipe.Directions[i]
+											</div>
+										}
+
+									</div>
+								</div>
+							}
+						</div>
+						<hr/>
+					}
+					@if (message.Products?.Length > 0)
+					{
+						<p class="inventorycontent">Items in stock</p>
+
+						foreach (var product in message.Products)
+						{
+							var dollars = (int)product.Cost;
+							var cents = (int)((product.Cost - dollars) * 100);
+							<div class="product">
+								<img src="@product.ImagePath" alt="Image of @product.Name" class="message-image"/>
+								<div class="product-info">
+									<p class="product-cost">
+										<span class="dollars">$@dollars</span><span class="cents">@cents.ToString("D2")</span>
+									</p>
+									<p class="product-name">@product.Name</p>
+									<p class="product-size">@product.Size</p>
+								</div>
+								<button class="add-to-cart-button" @onclick="() => AddToCart(product)">Add to Cart</button>
+								<div class="quantity-control">
+									<button class="quantity-button decrement-button" @onclick="() => DecrementQuantity(product)">-</button>
+									<input type="text" class="quantity-input" value="@product.Quantity" readonly />
+									<button class="quantity-button increment-button" @onclick="() => IncrementQuantity(product)">+</button>
+								</div>
+								
+
+								<div class="clear"></div>
+
+							</div>
+						}
+					}
+					else if (message is { IsUser: false,IsLoading: false, IsError: false, IsNonInteractive: false })
+					{
+						<p class="inventorycontent">Sorry, there are no matching items in stock</p>
+					}
+				</div>
+				<div class="clear"></div>
+			</div>
+		}
+		<i class="fas fa-arrow-down scroll-down-arrow @(_scrollDownArrowVisible ? string.Empty : "hidden")" @onclick="ScrollToBottom"></i>
+
+	</div>
+	<div class="chat-input">
+		
+		<textarea @bind="_input" placeholder="@(_isSendingMessage ? "Please wait..." : "Enter message here")" @ref="_inputElement" disabled="@_isSendingMessage"></textarea>
+		
+		<button class="send-prompt-button @(_isSendingMessage ? "disabled" : string.Empty)" @onclick="SendMessage" disabled="@_isSendingMessage">Send</button>
+		<button class="cancel-prompt-button" @onclick="CancelSendMessage" hidden="@(_isSendingMessage == false)">Cancel</button>
+		<button class="clear-prompt-button @(_isSendingMessage ? "disabled" : string.Empty)" @onclick="ClearMessages" disabled="@_isSendingMessage">Clear</button>
+
+	</div>
+</div>
+
+@code {
+	private readonly List<ChatMessage?> _messages = new();
+	private CancellationTokenSource? _sendMessageCts;
+	private ElementReference _inputElement;
+	private string _input = string.Empty;
+	private bool _scrollDownArrowVisible;
+	private bool _isSendingMessage;
+	private bool _isRecipesVisible = true;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await JsRuntime.InvokeVoidAsync("initEnterKeyListener", _inputElement, DotNetObjectReference.Create(this));
+			await AddChatMessage(
+				new ChatMessage 
+				{ 
+					IsUser = false, 
+					PreContent = "Greetings! I'm your virtual grocer assistant. Ask me for any grocery items or recipes.", 
+					IsNonInteractive = true 
+				});
+		}
+	}
+
+	[JSInvokable]
+	public void SetScrollDownArrowVisibility(bool visible)
+	{
+		_scrollDownArrowVisible = visible;
+		StateHasChanged();
+	}
+
+	[JSInvokable]
+	public async Task SendMessageFromJs()
+	{
+		await SendMessage();
+		await InvokeAsync(StateHasChanged);
+	}
+
+	private async Task AddChatMessage(ChatMessage chatMessage)
+	{
+		_messages.Add(chatMessage);
+		await InvokeAsync(StateHasChanged);
+
+	}
+
+	private async Task AddToCart(Product product)
+	{
+		// Logic to add the product to the cart.
+	}
+
+	private async Task ClearMessages()
+	{
+		_messages.Clear();
+		await AddChatMessage(
+			new ChatMessage 
+			{ 
+				IsUser = false, 
+				PreContent = "Alright, let's get back to it! Ask me for any grocery items or recipes.",
+				IsNonInteractive = true
+			});
+	}
+
+	private async Task SendMessage()
+	{
+		if (_isSendingMessage)
+		{
+			return;
+		}
+
+		_isSendingMessage = true;
+
+		try
+		{
+			var copyOfInput = _input;
+
+			if (string.IsNullOrWhiteSpace(_input))
+			{
+				return;
+			}
+
+			_input = string.Empty;
+
+			_messages.Add(new ChatMessage { PreContent = copyOfInput, IsUser = true });
+			await ScrollToBottom();
+
+			// Create a temporary message
+			var tempMessage = new ChatMessage { PreContent = "Working .", IsUser = false, IsLoading = true };
+			_messages.Add(tempMessage);
+
+			// Start a background task that updates the temporary message every 1/4th of a second
+			_sendMessageCts = new CancellationTokenSource();
+			var token = _sendMessageCts.Token;
+			_ = Task.Run(async () =>
+			{
+				var count = 1;
+				while (!token.IsCancellationRequested)
+				{
+					await Task.Delay(TimeSpan.FromSeconds(0.25), token);
+					count = count % 10 + 1;
+					tempMessage.PreContent = $"Working {new string('.', count)}";
+					await InvokeAsync(StateHasChanged);
+				}
+			}, token);
+
+			// Send HTTP request
+			var response = await Http.PostAsJsonAsync("/chat", new ChatPrompt { Prompt = copyOfInput }, _sendMessageCts.Token);
+
+			// Cancel the background task
+			_sendMessageCts.Cancel();
+
+			// Update the temporary message with the actual response
+			var result = await response.Content.ReadFromJsonAsync<ChatMessage>();
+			var index = _messages.IndexOf(tempMessage);
+			if (index >= 0)
+			{
+				_messages[index]!.PreContent = string.Empty;
+				_messages[index] = result;
+			}
+
+			await ScrollToBottom();
+		}
+		finally
+		{
+			_messages.ForEach(m => m!.IsLoading = false);
+			_isSendingMessage = false;
+		}
+	}
+
+	private void CancelSendMessage()
+	{
+		if (_sendMessageCts is {IsCancellationRequested: false })
+		{
+			_sendMessageCts.Cancel();
+		}
+		_isSendingMessage = false;
+	}
+
+	private async Task ScrollToBottom()
+	{
+		await JsRuntime.InvokeVoidAsync("window.scrollToBottom");
+	}
+
+	private static void IncrementQuantity(Product product)
+	{
+		if (product.Quantity < 98)
+		{
+			product.Quantity += 1;
+		}
+	}
+
+	private static void DecrementQuantity(Product product)
+	{
+		if (product.Quantity >= 1)
+		{
+			product.Quantity -= 1;
+		}
+	}
+}
