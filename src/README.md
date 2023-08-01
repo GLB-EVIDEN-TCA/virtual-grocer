@@ -28,6 +28,6 @@ To launch the application, you simply need to run the back-end API server.
 
     1. In the browser, you can see the web application has loaded.
     2. Type into the textbox to ask the chatbot any grocery-related questions you may have.
-    ![](/Grocer.png)
+![](/Grocer.png)
 
 
