@@ -1,0 +1,319 @@
+{
+	"value": [
+		{
+			"@search.action": "upload", 
+			"id": "1",
+			"name": "Organic Unbleached White All-Purpose Flour",
+			"aliases": ["white flour", "all-purpose flour", "organic flour", "unbleached flour", "baking flour"],
+			"size": "5 lb",
+			"image_name": "flour.jfif",
+			"cost": 6.79
+		},
+		{
+			"@search.action": "upload", 
+			"id": "2",
+			"name": "Premium Pure Cane Granulated Sugar",
+			"aliases": ["granulated sugar", "white sugar", "sweetener", "baking sugar"],
+			"size": "4 oz",
+			"image_name": "sugar.jfif",
+			"cost": 4.79
+		},
+		{
+			"@search.action": "upload", 
+			"id": "3",
+			"name": "Cocoa Powder Unsweetened",
+			"aliases": ["cocoa powder", "chocolate powder", "baking cocoa", "unsweetened cocoa"],
+			"size": "10 oz",
+			"image_name": "cocoa-powder.jfif",
+			"cost": 7.29
+		},
+		{
+			"@search.action": "upload", 
+			"id": "4",
+			"name": "Baking Powder",
+			"aliases": ["rising agent", "leavening agent", "baking ingredient"],
+			"size": "8.1 oz",
+			"image_name": "baking-powder.jpg",
+			"cost": 2.49
+		},
+		{
+			"@search.action": "upload", 
+			"id": "5",
+			"name": "Acme Pure Baking Soda",
+			"aliases": ["sodium bicarbonate", "baking soda", "cleaning agent", "leavening agent"],
+			"size": "1 lb",
+			"image_name": "baking-soda.jpg",
+			"cost": 1.29
+		},
+		{
+			"@search.action": "upload", 
+			"id": "6",
+			"name": "Acme Natural Sea Salt",
+			"aliases": ["sea salt", "cooking salt", "table salt", "seasoning"],
+			"size": "26 oz",
+			"image_name": "salt.jpg",
+			"cost": 3.53
+		},
+		{
+			"@search.action": "upload", 
+			"id": "7",
+			"name": "DeLallo Instant Espresso Powder",
+			"aliases": ["espresso powder", "coffee powder", "instant coffee", "coffee flavor"],
+			"size": "1.94 oz",
+			"image_name": "espresso-powder.webp",
+			"cost": 6.99
+		},
+		{
+			"@search.action": "upload", 
+			"id": "8",
+			"name": "Acme 2% Reduced Fat Milk",
+			"aliases": ["2% milk", "reduced fat milk", "low fat milk", "dairy"],
+			"size": "1 gal",
+			"image_name": "milk.jfif",
+			"cost": 2.79
+		},
+		{
+			"@search.action": "upload", 
+			"id": "9",
+			"name": "Acme Extra Virgin Olive Oil",
+			"aliases": ["olive oil", "cooking oil", "extra virgin olive oil", "EVOO"],
+			"size": "32 oz",
+			"image_name": "olive-oil.jpg",
+			"cost": 13.99
+		},
+		{
+			"@search.action": "upload", 
+			"id": "10",
+			"name": "Acme Large Brown Eggs",
+			"aliases": ["eggs", "large eggs", "brown eggs", "protein"],
+			"size": "12 ct",
+			"image_name": "eggs.jfif",
+			"cost": 1.89
+		},
+		{
+			"@search.action": "upload", 
+			"id": "11",
+			"name": "Vanilla Extract",
+			"aliases": ["vanilla", "baking extract", "flavor extract", "vanilla flavor"],
+			"size": "4 oz",
+			"image_name": "vanilla-extract.jfif",
+			"cost": 14.77
+		},
+		{
+			"@search.action": "upload", 
+			"id": "12",
+			"name": "Gilbert's All Natural Caprese Chicken Sausage",
+			"aliases": ["sausage", "chicken", "breakfast sausage", "caprese"],
+			"size": "4 ct / 10 oz",
+			"image_name": "chicken-sausage.webp",
+			"cost": 3.99
+		},
+		{
+			"@search.action": "upload", 
+			"id": "13",
+			"name": "Acme Organic Baby Spinach",
+			"aliases": ["spinach", "greens", "salad greens", "vegetable", "leafy greens"],
+			"size": "5 oz",
+			"image_name": "baby-spinach.jpg",
+			"cost": 3.49
+		},
+		{
+			"@search.action": "upload", 
+			"id": "14",
+			"name": "Acme Shredded Mild Cheddar Cheese",
+			"aliases": ["cheddar cheese", "shredded cheese", "mild cheddar", "cheese"],
+			"size": "8 oz",
+			"image_name": "cheddar-mild-cheese.jfif",
+			"cost": 2
+		},
+		{
+			"@search.action": "upload", 
+			"id": "15",
+			"name": "Acme Salsa Verde Medium",
+			"aliases": ["salsa", "medium salsa", "verde salsa", "green salsa", "Mexican sauce"],
+			"size": "16 oz",
+			"image_name": "medium-salsa.jfif",
+			"cost": 3.02
+		},
+		{
+			"@search.action": "upload", 
+			"id": "16",
+			"name": "Acme Salsa Mild",
+			"aliases": ["salsa", "mild salsa", "chunky salsa", "Mexican sauce"],
+			"size": "16 oz",
+			"image_name": "mild-salsa.jfif",
+			"cost": 3.49
+		},
+		{
+			"@search.action": "upload", 
+			"id": "17",
+			"name": "Medium Ripe Avocado",
+			"aliases" : ["ripe avocado", "medium avocado", "avocado"],
+			"size": "1 ct",
+			"image_name": "large-avocado.jfif",
+			"cost": 0.99
+		},
+		{
+			"@search.action": "upload", 
+			"id": "18",
+			"name": "Acme Pure Ground Black Pepper",
+			"aliases" : ["mccormick pepper", "ground pepper", "black pepper"],
+			"size": "3 oz",
+			"image_name": "black-pepper.jfif",
+			"cost": 5.49
+		},
+		{
+			"@search.action": "upload", 
+			"id": "19",
+			"name": "Acme Organic Cilantro",
+			"aliases" : ["organic cilantro", "simple cilantro", "cilantro"],
+			"size": "0.5 oz",
+			"image_name": "cilantro.jfif",
+			"cost": 2.29
+		},
+		{
+			"@search.action": "upload", 
+			"id": "20",
+			"name": "Roma Tomato",
+			"aliases" : ["italian tomato", "red tomato", "tomato", "tomatoes", "roma tomatoes"],
+			"size": "1 ct",
+			"image_name": "roma-tomato.jfif",
+			"cost": 0.45
+		},
+		{
+			"@search.action": "upload", 
+			"id": "21",
+			"name": "Acme Petite Canned Diced Tomatoes",
+			"aliases" : ["red tomatoes", "diced tomatoes", "canned tomatoes"],
+			"size": "14.5 oz",
+			"image_name": "diced-canned-tomatoes.jfif",
+			"cost": 1.00
+		},
+		{
+			"@search.action": "upload", 
+			"id": "22",
+			"name": "Jalapeno Peppers",
+			"aliases" : ["jalapeno", "hot pepper", "jalapeno pepper", "jalapeno peppers"],
+			"size": "1 ct",
+			"image_name": "jalapeno-pepper.jfif",
+			"cost": 0.22
+		},
+		{
+			"@search.action": "upload", 
+			"id": "23",
+			"name": "Jumbo Red Onions",
+			"aliases" : ["red onions", "jumbo onions", "onion", "onions"],
+			"size": "1 ct",
+			"image_name": "jumbo-red-onion.jfif",
+			"cost": 0.70
+		},
+		{
+			"@search.action": "upload", 
+			"id": "24",
+			"name": "Garlic",
+			"aliases" : ["fresh garlic", "garlic clove", "garlic cloves"],
+			"size": "1 ct",
+			"image_name": "garlic.jfif",
+			"cost": 0.59
+		},
+		{
+			"@search.action": "upload", 
+			"id": "25",
+			"name": "Acme Chili Powder",
+			"aliases" : ["chili powder", "smart chili"],
+			"size": "1.98 oz",
+			"image_name": "chili-powder.jfif",
+			"cost": 1.25
+		},
+		{
+			"@search.action": "upload", 
+			"id": "26",
+			"name": "McCormick Ground Cumin",
+			"aliases" : ["mccormick cumin", "ground cumin"],
+			"size": "1.5 oz",
+			"image_name": "ground-cumin.webp",
+			"cost": 3.79
+		},
+		{
+			"@search.action": "upload", 
+			"id": "27",
+			"name": "Large Limes",
+			"aliases" : ["green limes", "lime", "lime juice"],
+			"size": "1 ct",
+			"image_name": "large-lime.jfif",
+			"cost": 0.59
+		},
+		{
+			"@search.action": "upload", 
+			"id": "28",
+			"name": "Honeycrisp Apple",
+			"aliases" : ["sweet apple", "apple"],
+			"size": "1 ct",
+			"image_name": "honeycrisp-apple.jfif",
+			"cost": 1.50
+		},
+		{
+			"@search.action": "upload", 
+			"id": "29",
+			"name": "Acme Apple Juice",
+			"aliases" : ["juice", "apple juice"],
+			"size": "64 fl oz",
+			"image_name": "apple-juice.jfif",
+			"cost": 2.69
+		},
+		{
+			"@search.action": "upload", 
+			"id": "30",
+			"name": "Fresh Atlantic Salmon Whole Fillet Farm Raised",
+			"aliases" : ["salmon fillet", "atlantic salmon", "salmon", "salmon fillets"],
+			"size": "1 ct",
+			"image_name": "fresh-atlantic-salmon.jpg",
+			"cost": 24.98
+		},
+		{
+			"@search.action": "upload", 
+			"id": "31",
+			"name": "Bakery Fresh Chocolate Cake",
+			"aliases" : ["cake", "chocolate cake", "bakery cake", "bakery chocolate cake", "whole chocolate cake", "premade cake", "premade chocolate cake"],
+			"size": "6 in / 16.7 oz",
+			"image_name": "bakery-chocolate-cake.jfif",
+			"cost": 5.00
+		},		
+		{
+			"@search.action": "upload", 
+			"id": "32",
+			"name": "Bakery Fresh Oatmeal Raisin Cookies",
+			"aliases" : ["cookies", "oatmeal raisin", "raisin cookies", "bakery cookies", "oatmeal cookies"],
+			"size": "16 ct",
+			"image_name": "oatmeal-raisin-cookies.jfif",
+			"cost": 4.49
+		},
+		{
+			"@search.action": "upload", 
+			"id": "33",
+			"name": "Bakery Fresh Chocolate Chip Cookies",
+			"aliases" : ["cookies", "chocolate chip", "chocolate chip cookies", "chocolate cookies", "bakery cookies"],
+			"size": "16 ct",
+			"image_name": "chocolate-chip-cookies.jfif",
+			"cost": 4.49
+		},
+		{
+			"@search.action": "upload", 
+			"id": "34",
+			"name": "Betty Crocker Super Moist Chocolate Fudge Cake Mix",
+			"aliases" : ["chocolate cake mix", "chocolate fudge mix", "cake mix", "fudge cake", "moist cake", "moist chocolate cake"],
+			"size": "15.25 oz",
+			"image_name": "betty-crocker-super-moist-chocolate-fudge-cake.jfif",
+			"cost": 1.79
+		},
+		{
+			"@search.action": "upload", 
+			"id": "35",
+			"name": "Corn on the Cob",
+			"aliases" : ["corn", "corn cob"],
+			"size": "1 ct",
+			"image_name": "corn.jfif",
+			"cost": 0.50
+		}
+	]
+}
