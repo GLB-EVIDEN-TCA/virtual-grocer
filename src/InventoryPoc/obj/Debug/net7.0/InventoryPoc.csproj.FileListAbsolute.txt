@@ -1,5 +1,0 @@
-/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc/obj/Debug/net7.0/InventoryPoc.csproj.AssemblyReference.cache
-/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc/obj/Debug/net7.0/InventoryPoc.GeneratedMSBuildEditorConfig.editorconfig
-/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc/obj/Debug/net7.0/InventoryPoc.AssemblyInfoInputs.cache
-/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc/obj/Debug/net7.0/InventoryPoc.AssemblyInfo.cs
-/Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc/obj/Debug/net7.0/InventoryPoc.csproj.CoreCompileInputs.cache
