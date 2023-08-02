@@ -16,3 +16,5 @@
 /src/Eviden.VirtualGrocer/Shared/obj
 /src/.vs/ProjectEvaluation/eviden.virtualgrocer.projects.v6.1
 /src/.vs/ProjectEvaluation/eviden.virtualgrocer.metadata.v6.1
+/.vs
+/src/.vs/ProjectEvaluation
