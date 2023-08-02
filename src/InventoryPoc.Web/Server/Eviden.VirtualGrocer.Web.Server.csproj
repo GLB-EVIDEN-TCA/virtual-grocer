@@ -43,8 +43,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\InventoryPoc.Web.Client.csproj" />
-    <ProjectReference Include="..\Shared\InventoryPoc.Web.Shared.csproj" />
+    <ProjectReference Include="..\Client\Eviden.VirtualGrocer.Web.Client.csproj" />
+    <ProjectReference Include="..\Shared\Eviden.VirtualGrocer.Shared.csproj" />
   </ItemGroup>
 
 

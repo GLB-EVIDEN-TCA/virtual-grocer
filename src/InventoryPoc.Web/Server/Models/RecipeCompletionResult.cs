@@ -1,6 +1,6 @@
-﻿using InventoryPoc.Web.Shared.Models;
+﻿using Eviden.VirtualGrocer.Shared.Models;
 
-namespace InventoryPoc.Web.Server.Models
+namespace Eviden.VirtualGrocer.Web.Server.Models
 {
     public record RecipeCompletionResult(
         string? RecipeName,

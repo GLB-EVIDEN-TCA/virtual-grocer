@@ -1,8 +1,8 @@
-﻿using InventoryPoc.Web.Server.Models;
+﻿using Eviden.VirtualGrocer.Web.Server.Models;
 using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.SemanticKernel.SkillDefinition;
 
-namespace InventoryPoc.Web.Server.Skills
+namespace Eviden.VirtualGrocer.Web.Server.Skills
 {
     public class RememberShoppingList
     {

@@ -1,5 +1,5 @@
-using InventoryPoc.Web.Server;
-using InventoryPoc.Web.Server.Extensions;
+using Eviden.VirtualGrocer.Web.Server;
+using Eviden.VirtualGrocer.Web.Server.Extensions;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

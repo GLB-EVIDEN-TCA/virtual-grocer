@@ -1,10 +1,10 @@
 ﻿using System.Text.Json;
-using InventoryPoc.Web.Server.Models;
-using InventoryPoc.Web.Shared.Models;
+using Eviden.VirtualGrocer.Web.Server.Models;
+using Eviden.VirtualGrocer.Shared.Models;
 using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.SemanticKernel.SkillDefinition;
 
-namespace InventoryPoc.Web.Server.Skills;
+namespace Eviden.VirtualGrocer.Web.Server.Skills;
 
 public class QueryBuilderSkill
 {

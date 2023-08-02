@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace InventoryPoc.Web.Shared;
+namespace Eviden.VirtualGrocer.Shared;
 
 public class LoremIpsumGeneration
 {

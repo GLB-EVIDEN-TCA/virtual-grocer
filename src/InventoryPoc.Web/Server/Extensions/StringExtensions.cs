@@ -1,4 +1,4 @@
-﻿namespace InventoryPoc.Web.Server.Extensions
+﻿namespace Eviden.VirtualGrocer.Web.Server.Extensions
 {
     public static class StringExtensions
     {

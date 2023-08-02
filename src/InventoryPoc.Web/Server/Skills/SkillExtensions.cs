@@ -2,7 +2,7 @@
 using Microsoft.SemanticKernel.SemanticFunctions;
 using System.Reflection;
 
-namespace InventoryPoc.Web.Server.Skills
+namespace Eviden.VirtualGrocer.Web.Server.Skills
 {
     public static class SkillExtensions
     {

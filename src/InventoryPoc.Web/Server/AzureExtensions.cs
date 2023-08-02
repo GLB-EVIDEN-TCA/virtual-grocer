@@ -1,9 +1,9 @@
 ﻿using Azure;
 using Azure.Search.Documents;
-using InventoryPoc.Web.Server.Skills;
+using Eviden.VirtualGrocer.Web.Server.Skills;
 using Microsoft.SemanticKernel;
 
-namespace InventoryPoc.Web.Server
+namespace Eviden.VirtualGrocer.Web.Server
 {
     public static class AzureExtensions
     {

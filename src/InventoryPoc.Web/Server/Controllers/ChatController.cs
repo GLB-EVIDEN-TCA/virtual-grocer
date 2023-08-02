@@ -1,13 +1,13 @@
 using System.Text.Json;
 using Azure.Search.Documents;
-using InventoryPoc.Web.Server.Skills;
-using InventoryPoc.Web.Shared.Models;
+using Eviden.VirtualGrocer.Web.Server.Skills;
+using Eviden.VirtualGrocer.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.AI.ChatCompletion;
 using Microsoft.SemanticKernel.Orchestration;
 
-namespace InventoryPoc.Web.Server.Controllers
+namespace Eviden.VirtualGrocer.Web.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

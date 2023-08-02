@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryPoc.Web.Server", "InventoryPoc.Web\Server\InventoryPoc.Web.Server.csproj", "{D3FB2DB4-3B44-462B-92F3-578B2F81001C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eviden.VirtualGrocer.Web.Server", "InventoryPoc.Web\Server\Eviden.VirtualGrocer.Web.Server.csproj", "{D3FB2DB4-3B44-462B-92F3-578B2F81001C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryPoc.Web.Client", "InventoryPoc.Web\Client\InventoryPoc.Web.Client.csproj", "{16137C71-9B5B-4985-B777-A0D7726D8C6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eviden.VirtualGrocer.Web.Client", "InventoryPoc.Web\Client\Eviden.VirtualGrocer.Web.Client.csproj", "{16137C71-9B5B-4985-B777-A0D7726D8C6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryPoc.Web.Shared", "InventoryPoc.Web\Shared\InventoryPoc.Web.Shared.csproj", "{9720D20F-4F66-4061-B094-2E49841B80E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eviden.VirtualGrocer.Shared", "InventoryPoc.Web\Shared\Eviden.VirtualGrocer.Shared.csproj", "{9720D20F-4F66-4061-B094-2E49841B80E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{64EE2856-049C-4CAB-B732-A8D0E77B96AF}"
 	ProjectSection(SolutionItems) = preProject

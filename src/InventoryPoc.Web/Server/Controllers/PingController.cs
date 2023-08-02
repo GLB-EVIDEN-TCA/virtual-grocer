@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventoryPoc.Web.Server.Controllers
+namespace Eviden.VirtualGrocer.Web.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

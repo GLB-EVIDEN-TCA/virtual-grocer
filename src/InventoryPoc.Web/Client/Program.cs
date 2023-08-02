@@ -1,4 +1,4 @@
-using InventoryPoc.Web.Client;
+using Eviden.VirtualGrocer.Web.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

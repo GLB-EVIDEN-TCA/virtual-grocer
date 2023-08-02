@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\InventoryPoc.Web.Shared.csproj" />
+    <ProjectReference Include="..\Shared\Eviden.VirtualGrocer.Shared.csproj" />
   </ItemGroup>
 
 </Project>

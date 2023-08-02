@@ -1,7 +1,7 @@
-﻿using InventoryPoc.Web.Shared.Models;
+﻿using Eviden.VirtualGrocer.Shared.Models;
 using System.Text.Json.Serialization;
 
-namespace InventoryPoc.Web.Server.Models
+namespace Eviden.VirtualGrocer.Web.Server.Models
 {
     public record ProductSearchResult(
         [property: JsonPropertyName("id")] string Id,
