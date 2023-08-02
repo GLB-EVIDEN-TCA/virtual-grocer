@@ -1,1 +1,8 @@
 .DS_Store
+/src/.vs/InventoryPoc
+/src/InventoryPoc.Web/Server/bin
+/src/InventoryPoc.Web/Server/obj
+/src/InventoryPoc.Web/Client/bin
+/src/InventoryPoc.Web/Client/obj
+/src/InventoryPoc.Web/Shared/bin
+/src/InventoryPoc.Web/Shared/obj

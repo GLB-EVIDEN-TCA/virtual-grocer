@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows,browser
 build_property.RootNamespace = InventoryPoc.Web.Shared
-build_property.ProjectDir = /Users/anay.khandekar/Desktop/generative-ai-examples/Microsoft/eCommerce/VirtualGrocer/src/InventoryPoc.Web/Shared/
+build_property.ProjectDir = C:\projects\eviden\azuremarketplace\virtual-grocer\src\InventoryPoc.Web\Shared\
