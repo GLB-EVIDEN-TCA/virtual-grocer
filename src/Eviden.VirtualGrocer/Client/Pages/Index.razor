@@ -10,77 +10,84 @@
 			<div class="chat-message @(message!.IsUser ? "user-message" : "bot-message")">
 				<img src="@(message.IsUser ? "woman.png" : "assistant.jfif")" alt="Avatar" class="avatar @(message.IsUser ? "right" : "left")">
 				<div class="message-details">
-					<p class="precontent @(string.IsNullOrEmpty(message.PreContent)? "hidden":"")">@message.PreContent</p>
-					@if (message.Recipes?.Length > 0)
+					@if (message.IsError)
 					{
-						<p class="recipecontent">
-							Recipes
-
-							<button class="toggle-recipes" @onclick="() => _isRecipesVisible = !_isRecipesVisible">
-								@(_isRecipesVisible ? "Hide" : "Show")
-							</button>
-						</p>
-
-						<div class="recipes @(_isRecipesVisible ? "" : "hidden")">
-
-							@foreach (var recipe in message.Recipes)
-							{
-								<div class="recipe">
-									<div class="recipe-name">
-										@recipe.Name <span class="recipe-url">from <a href="@recipe.Url" target="_blank">@recipe.Url</a></span>
-									</div>
-									<div class="recipe-description">@recipe.Description</div>
-									<div class="recipe-directions">
-										@if (recipe.Directions!.Length > 0)
-										{
-											<p>Directions</p>
-										}
-										@for (var i = 0; i < recipe.Directions.Length; i++)
-										{
-											<div class="recipe-direction">
-												@(i + 1) - @recipe.Directions[i]
-											</div>
-										}
-
-									</div>
-								</div>
-							}
-						</div>
-						<hr/>
+						<p class="precontent @(string.IsNullOrEmpty(message.ErrorMessage)? "hidden":"")">@message.ErrorMessage</p>
 					}
-					@if (message.Products?.Length > 0)
+					else
 					{
-						<p class="inventorycontent">Items in stock</p>
-
-						foreach (var product in message.Products)
+						<p class="precontent @(string.IsNullOrEmpty(message.PreContent)? "hidden":"")">@message.PreContent</p>
+						@if (message.Recipes?.Length > 0)
 						{
-							var dollars = (int)product.Cost;
-							var cents = (int)((product.Cost - dollars) * 100);
-							<div class="product">
-								<img src="@product.ImagePath" alt="Image of @product.Name" class="message-image"/>
-								<div class="product-info">
-									<p class="product-cost">
-										<span class="dollars">$@dollars</span><span class="cents">@cents.ToString("D2")</span>
-									</p>
-									<p class="product-name">@product.Name</p>
-									<p class="product-size">@product.Size</p>
-								</div>
-								<button class="add-to-cart-button" @onclick="() => AddToCart(product)">Add to Cart</button>
-								<div class="quantity-control">
-									<button class="quantity-button decrement-button" @onclick="() => DecrementQuantity(product)">-</button>
-									<input type="text" class="quantity-input" value="@product.Quantity" readonly />
-									<button class="quantity-button increment-button" @onclick="() => IncrementQuantity(product)">+</button>
-								</div>
+							<p class="recipecontent">
+								Recipes
+
+								<button class="toggle-recipes" @onclick="() => _isRecipesVisible = !_isRecipesVisible">
+									@(_isRecipesVisible ? "Hide" : "Show")
+								</button>
+							</p>
+
+							<div class="recipes @(_isRecipesVisible ? "" : "hidden")">
+
+								@foreach (var recipe in message.Recipes)
+								{
+									<div class="recipe">
+										<div class="recipe-name">
+											@recipe.Name <span class="recipe-url">from <a href="@recipe.Url" target="_blank">@recipe.Url</a></span>
+										</div>
+										<div class="recipe-description">@recipe.Description</div>
+										<div class="recipe-directions">
+											@if (recipe.Directions!.Length > 0)
+											{
+												<p>Directions</p>
+											}
+											@for (var i = 0; i < recipe.Directions.Length; i++)
+											{
+												<div class="recipe-direction">
+													@(i + 1) - @recipe.Directions[i]
+												</div>
+											}
+
+										</div>
+									</div>
+								}
+							</div>
+							<hr/>
+						}
+						@if (message.Products?.Length > 0)
+						{
+							<p class="inventorycontent">Items in stock</p>
+
+							foreach (var product in message.Products)
+							{
+								var dollars = (int)product.Cost;
+								var cents = (int)((product.Cost - dollars) * 100);
+								<div class="product">
+									<img src="@product.ImagePath" alt="Image of @product.Name" class="message-image"/>
+									<div class="product-info">
+										<p class="product-cost">
+											<span class="dollars">$@dollars</span><span class="cents">@cents.ToString("D2")</span>
+										</p>
+										<p class="product-name">@product.Name</p>
+										<p class="product-size">@product.Size</p>
+									</div>
+									<button class="add-to-cart-button" @onclick="() => AddToCart(product)">Add to Cart</button>
+									<div class="quantity-control">
+										<button class="quantity-button decrement-button" @onclick="() => DecrementQuantity(product)">-</button>
+										<input type="text" class="quantity-input" value="@product.Quantity" readonly />
+										<button class="quantity-button increment-button" @onclick="() => IncrementQuantity(product)">+</button>
+									</div>
 								
 
-								<div class="clear"></div>
+									<div class="clear"></div>
 
-							</div>
+								</div>
+							}
 						}
-					}
-					else if (message is { IsUser: false,IsLoading: false, IsError: false, IsNonInteractive: false })
-					{
-						<p class="inventorycontent">Sorry, there are no matching items in stock</p>
+						else if (message is { IsUser: false,IsLoading: false, IsError: false, IsNonInteractive: false })
+						{
+							<p class="inventorycontent">Sorry, there are no matching items in stock</p>
+						}
 					}
 				</div>
 				<div class="clear"></div>

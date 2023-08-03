@@ -3,6 +3,7 @@
     public record ChatMessage
     {
 		public string? PreContent { get; set; } = string.Empty;
+        public string? ErrorMessage { get; set; } = string.Empty;
 
 		public string? InventoryContent { get; set; } = string.Empty;
         public string? RecipeContent { get; set; } = string.Empty;

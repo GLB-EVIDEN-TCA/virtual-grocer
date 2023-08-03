@@ -53,16 +53,26 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
 
                 if (skContext.ErrorOccurred)
                 {
-                    return new ChatMessage { PreContent = skContext.Result, IsError = true };
+                    string? errorMessage;
+                    if (skContext.LastException is Microsoft.SemanticKernel.AI.AIException)
+                    {
+                        errorMessage = ((Microsoft.SemanticKernel.AI.AIException)skContext.LastException).Detail;
+                    }
+                    else
+                    {
+						errorMessage = skContext.LastException?.Message;
+					}
+
+					return new ChatMessage { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
                 }
 
                 return JsonSerializer.Deserialize<ChatMessage>(skContext.Result) ?? new ChatMessage();
             }
-            catch
+            catch (Exception ex)
             {
                 if (skContext != null)
                 {
-                    return new ChatMessage { PreContent = skContext.Result, IsError = true };
+                    return new ChatMessage { PreContent = skContext.Result, IsError = true, ErrorMessage = ex.ToString() };
                 }
 
                 return new ChatMessage
