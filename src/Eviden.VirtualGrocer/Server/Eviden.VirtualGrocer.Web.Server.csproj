@@ -39,6 +39,8 @@
   <ItemGroup>
     <PackageReference Include="Azure.Search.Documents" Version="11.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.5" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="2.13.2" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.13.2" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="0.14.547.1-preview" />
   </ItemGroup>
 

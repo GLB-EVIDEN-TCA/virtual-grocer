@@ -13,5 +13,13 @@
     "Storage": {
       "ProductImagePath": "https://genaipocstorage.blob.core.windows.net/ecommerce-poc/product-images/generic/"
     }
+  },
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "Domain": "mavenwave.com",
+    "TenantId": "61c2b580-8619-4baf-8040-bac4442e29a6",
+    "ClientId": "14d82eec-204b-4c2f-b7e8-296a70dab67e",
+    "CallbackPath": "/signin-oidc",
+    "SignedOutCallbackPath": "/signout-callback-oidc"
   }
 }

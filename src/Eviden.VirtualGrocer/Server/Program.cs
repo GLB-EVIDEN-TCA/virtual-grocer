@@ -1,13 +1,13 @@
 using Eviden.VirtualGrocer.Web.Server;
 using Eviden.VirtualGrocer.Web.Server.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
 
 // Initialize the configuration
 var config = builder.Configuration;
@@ -19,6 +19,22 @@ var azureAiModel = config["Azure:OpenAI:Model"];
 var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
 var azureSearchKey = config["Azure:CognitiveSearch:QueryKey"];
 var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
+
+// Add services to the container.
+
+// Sign-in users with the Microsoft identity platform
+builder.Services.AddMicrosoftIdentityWebAppAuthentication(config);
+
+/*builder.Services.AddControllersWithViews(options =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+}).AddMicrosoftIdentityUI();*/
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 // Register objects in the DI container
 builder.Services.AddSingleton<IConfiguration>(config);
@@ -45,6 +61,8 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
