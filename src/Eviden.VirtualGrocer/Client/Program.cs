@@ -19,11 +19,24 @@ await builder.Build().RunAsync();
 
 builder.Services.AddMsalAuthentication(options =>
 {
+    ...
+    options.ProviderOptions.LoginMode = "redirect";
+});
+
+builder.Services.AddMsalAuthentication(options =>
+{
     builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
     options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
-//add DI bin to client side
-//builder.Services.AddSingleton<IConfiguration>(config);
-//builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
-//builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
+
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
+   options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
+});
+
+options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
+
+options.ProviderOptions.DefaultAccessTokenScopes.Add(
+    "api://41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
 
