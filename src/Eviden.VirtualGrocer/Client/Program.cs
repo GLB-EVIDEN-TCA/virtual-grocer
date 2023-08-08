@@ -15,28 +15,14 @@ builder.Services.AddHttpClient("Eviden.VirtualGrocer.Web.Client.ServerAPI", clie
 
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("Eviden.VirtualGrocer.Web.Client.ServerAPI"));
-await builder.Build().RunAsync();
-
-builder.Services.AddMsalAuthentication(options =>
-{
-    ...
-    options.ProviderOptions.LoginMode = "redirect";
-});
 
 builder.Services.AddMsalAuthentication(options =>
 {
     builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-    options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
+    options.ProviderOptions.LoginMode = "redirect";
+    options.ProviderOptions.DefaultAccessTokenScopes.Add("api://virtual-grocer/chat");
 });
 
-builder.Services.AddMsalAuthentication(options =>
-{
-    ...
-   options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
-});
+await builder.Build().RunAsync();
 
-options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
-
-options.ProviderOptions.DefaultAccessTokenScopes.Add(
-    "api://41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
 
