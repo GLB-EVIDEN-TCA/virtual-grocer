@@ -1,6 +1,9 @@
 # Virtual Grocer Application
 
-> This sample is meant to feature a generic deployable OpenAI implementation. 
+> This sample is meant to feature a generic deployable OpenAI implementation. In its current state, it is a grocery assistant, breaking down dishes into their ingredients and pulling relevant images to present to users. It can be repurposed for many different customer experiences. For example
+- construction projects: "I'd like to build a 30-ft patio, how would I do that?"
+- homelab setup: "What would I need to setup a self-hosted media server?"
+- travel planning: "I want to go to Cabo this June. What all should I pack?"
 
 # About Virtual Grocer
 
