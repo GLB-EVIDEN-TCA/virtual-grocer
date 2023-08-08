@@ -16,13 +16,13 @@ Before you get started, make sure you have the following requirements in place:
 - [Azure OpenAI](https://aka.ms/oai/access) resource or an account with [OpenAI](https://platform.openai.com).
 - [Visual Studio Code](https://code.visualstudio.com/Download) **(Optional)** 
 
-To launch the application, you simply need to run the back-end API server.
+To launch the application, you simply need to run the back-end server application.
 
-1. Open up a terminal (Ctrl+Shift+`) and navigate to `VirtualGrocer/src/`
+1. Open up a terminal and navigate to `virtual-grocer/src/Eviden.VirtualGrocer/Server/`
 2. Run `dotnet build` to build the project.
-3. Run `dotnet watch InventoryPoc.Web/Server/InventoryPoc.Web.Server.csproj`
+3. Run `dotnet watch --project InventoryPoc.Web/Server/InventoryPoc.Web.Server.csproj` to launch the project.
 
-> This will, for now, deploy the project locally to `localhost:5012`. In future implementation, we will set up ARM to deploy to a cluster.
+> This will, for now, deploy the project locally. In future implementation, we will set up an ARM template to cloud-deploy to an Azure tenant.
 
 ## Usage
 
