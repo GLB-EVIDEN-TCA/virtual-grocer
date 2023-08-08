@@ -20,7 +20,7 @@ To launch the application, you simply need to run the back-end server applicatio
 
 1. Open up a terminal and navigate to `virtual-grocer/src/Eviden.VirtualGrocer/Server/`
 2. Run `dotnet build` to build the project.
-3. Run `dotnet watch --project InventoryPoc.Web/Server/InventoryPoc.Web.Server.csproj` to launch the project.
+3. Run `dotnet watch` to launch the project.
 
 > This will, for now, deploy the project locally. In future implementation, we will set up an ARM template to cloud-deploy to an Azure tenant.
 
