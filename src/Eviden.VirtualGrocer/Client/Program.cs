@@ -19,10 +19,9 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
 builder.Services.AddMsalAuthentication(options =>
 {
     builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-    options.ProviderOptions.LoginMode = "redirect";
+    //options.ProviderOptions.LoginMode = "redirect";
     options.ProviderOptions.DefaultAccessTokenScopes.Add("api://virtual-grocer/chat");
 });
 
+
 await builder.Build().RunAsync();
-
-
