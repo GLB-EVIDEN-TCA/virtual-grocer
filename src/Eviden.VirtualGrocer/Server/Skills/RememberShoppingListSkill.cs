@@ -4,11 +4,11 @@ using Microsoft.SemanticKernel.SkillDefinition;
 
 namespace Eviden.VirtualGrocer.Web.Server.Skills
 {
-    public class RememberShoppingList
+    public class RememberShoppingListSkill
     {
         [SKFunction("Remember the shopping list from the Personal Shopper skill.")]
-        [SKFunctionName("Store")]
-        public string Store(string shoppingList, SKContext context)
+        [SKFunctionName(SkillNames.RememberShoppingListResult)]
+        public string RememberShoppingListResult(string shoppingList, SKContext context)
         {
             PersonalShopperCompletionResult result =
 				System.Text.Json.JsonSerializer.Deserialize<PersonalShopperCompletionResult>(shoppingList)!;
@@ -16,10 +16,5 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
             context.Variables["shoppingList"] = json;
             return json;
         }
-
-        [SKFunction("Recall the shopping list from the Personal Shopper skill.")]
-        [SKFunctionName("Recall")]
-        [SKFunctionContextParameter(Name = "shoppingList")]
-        public string Recall(SKContext context) => context.Variables["shoppingList"];
     }
 }

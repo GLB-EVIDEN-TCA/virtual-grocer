@@ -12,6 +12,11 @@
   "input": {
     "parameters": [
       {
+        "name": "chatHistory",
+        "description": "History of user requests",
+        "defaultValue": ""
+      },
+      {
         "name": "input",
         "description": "Ingredients or recipes",
         "defaultValue": ""
