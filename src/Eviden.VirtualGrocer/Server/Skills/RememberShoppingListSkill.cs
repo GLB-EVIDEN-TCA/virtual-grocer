@@ -1,13 +1,15 @@
 ﻿using Eviden.VirtualGrocer.Web.Server.Models;
 using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.SemanticKernel.SkillDefinition;
+using System.ComponentModel;
 
 namespace Eviden.VirtualGrocer.Web.Server.Skills
 {
     public class RememberShoppingListSkill
     {
-        [SKFunction("Remember the shopping list from the Personal Shopper skill.")]
-        [SKFunctionName(SkillNames.RememberShoppingListResult)]
+        [SKFunction]
+        [SKName(SkillNames.RememberShoppingListResult)]
+        [Description("Remember the shopping list from the Personal Shopper skill.")]
         public string RememberShoppingListResult(string shoppingList, SKContext context)
         {
             PersonalShopperCompletionResult result =

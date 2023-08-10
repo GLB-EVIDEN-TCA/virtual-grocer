@@ -1,7 +1,9 @@
 ﻿using Azure;
+using Azure.AI.OpenAI;
 using Azure.Search.Documents;
 using Eviden.VirtualGrocer.Web.Server.Skills;
 using Eviden.VirtualGrocer.Web.Server.Skills.History;
+using Microsoft.Extensions.Azure;
 using Microsoft.SemanticKernel;
 
 namespace Eviden.VirtualGrocer.Web.Server
@@ -33,8 +35,7 @@ namespace Eviden.VirtualGrocer.Web.Server
             services.AddScoped(
                 sp =>
                 {
-                    IKernel kernel = KernelBuilder.Create();
-                    kernel.Config.AddAzureTextCompletionService(model, endpoint, key);
+                    IKernel kernel = Kernel.Builder.WithAzureTextCompletionService(model, endpoint, key).Build();
                     sp.GetRequiredService<RegisterSkillsWithKernel>()(sp, kernel);
 
                     return kernel;

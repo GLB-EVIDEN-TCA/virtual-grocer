@@ -101,7 +101,7 @@
 		
 		<textarea @bind="_input" placeholder="@(_isSendingMessage ? "Please wait..." : "Enter message here")" @ref="_inputElement" disabled="@_isSendingMessage"></textarea>
 		
-		<button class="send-prompt-button @(_isSendingMessage ? "disabled" : string.Empty)" @onclick="SendMessage" disabled="@_isSendingMessage">Send</button>
+		<button class="send-prompt-button @(_isSendingMessage ? "disabled" : string.Empty)" @onclick="SendMessage" @ref="_sendElement" disabled="@_isSendingMessage">Send</button>
 		<button class="cancel-prompt-button" @onclick="CancelSendMessage" hidden="@(_isSendingMessage == false)">Cancel</button>
 		<button class="clear-prompt-button @(_isSendingMessage ? "disabled" : string.Empty)" @onclick="ClearMessages" disabled="@_isSendingMessage">Clear</button>
 
@@ -109,10 +109,11 @@
 </div>
 
 @code {
-	private readonly string _chatId = Guid.NewGuid().ToString();
+	private string _chatId = Guid.NewGuid().ToString();
 	private readonly List<ChatMessage?> _messages = new();
 	private CancellationTokenSource? _sendMessageCts;
 	private ElementReference _inputElement;
+	private ElementReference _sendElement;
 	private string _input = string.Empty;
 	private bool _scrollDownArrowVisible;
 	private bool _isSendingMessage;
@@ -141,8 +142,9 @@
 	}
 
 	[JSInvokable]
-	public async Task SendMessageFromJs()
+	public async Task SendMessageFromJS()
 	{
+		await _sendElement.FocusAsync();
 		await SendMessage();
 		await InvokeAsync(StateHasChanged);
 	}
@@ -161,6 +163,7 @@
 
 	private async Task ClearMessages()
 	{
+		_chatId = Guid.NewGuid().ToString();
 		_messages.Clear();
 		await AddChatMessage(
 			new ChatMessage(_chatId) 
@@ -183,7 +186,6 @@
 		try
 		{
 			var copyOfInput = _input;
-
 			if (string.IsNullOrWhiteSpace(_input))
 			{
 				return;

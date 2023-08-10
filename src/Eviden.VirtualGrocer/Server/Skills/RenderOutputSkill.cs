@@ -1,11 +1,10 @@
-﻿using System.Text.Json;
-using Eviden.VirtualGrocer.Web.Server.Models;
+﻿using System.ComponentModel;
+using System.Text.Json;
 using Eviden.VirtualGrocer.Shared.Models;
+using Eviden.VirtualGrocer.Web.Server.Models;
+using Eviden.VirtualGrocer.Web.Server.Skills.History;
 using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.SemanticKernel.SkillDefinition;
-using System.Runtime.CompilerServices;
-using Eviden.VirtualGrocer.Web.Server.Skills.History;
-using System.Text;
 
 namespace Eviden.VirtualGrocer.Web.Server.Skills
 {
@@ -19,11 +18,12 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
             _imagePath = imagePath;
         }
 
-        [SKFunction("Render the output from the Personal Shopper skill.")]
-        [SKFunctionName(SkillNames.RenderShoppingListResponse)]
-        [SKFunctionContextParameter(Name = "chatId", Description = "Chat ID to extract history from")]
-        [SKFunctionContextParameter(Name = "products", Description = "List of matching inventory items/products in shopping list")]
-        [SKFunctionContextParameter(Name = "shoppingList", Description = "List of desired products/recipes")]
+        [SKFunction]
+        [SKName(SkillNames.RenderShoppingListResponse)]
+        [Description("Render the output from the Personal Shopper skill.")]
+        [SKParameter("chatId", "Chat ID to extract history from")]
+        [SKParameter("products", "List of matching inventory items/products in shopping list")]
+        [SKParameter("shoppingList", "List of desired products/recipes")]
         public string RenderShoppingListResponse(SKContext context)
         {
             string shoppingListOutput = context.Variables["shoppingList"];
@@ -44,18 +44,19 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
             return output;
         }
 
-        [SKFunction("Render the output from the ItemIntent skill into a query for the PersonalShopper skill.")]
-        [SKFunctionName(SkillNames.RenderItemIntentResponse)]
-        [SKFunctionContextParameter(Name = "chatId", Description = "Chat ID to extract history from")]
-        [SKFunctionContextParameter(Name = "originalPrompt", Description = "The original user prompt")]
+        [SKFunction]
+        [SKName(SkillNames.RenderItemIntentResponse)]
+        [Description("Render the output from the ItemIntent skill into a query for the PersonalShopper skill.")]
+        [SKParameter("chatId", "Chat ID to extract history from")]
+        [SKParameter("originalPrompt", "The original user prompt")]
         public async Task<string> RenderItemIntentResponse(string input, SKContext context)
         {
             ItemIntentCompletionResponse intent = JsonSerializer.Deserialize<ItemIntentCompletionResponse>(input)!;
             string chatId = context.Variables["chatId"];
 
             ResultHistory history = await _resultRepo.GetAsync(chatId);
-            List<string> newPurchase = intent.purchase.Where(x => history.AddPurchase(x)).ToList();
-            List<string> newMake = intent.make.Where(x => history.AddMake(x)).ToList();
+            List<string> newPurchase = (intent.purchase ?? Array.Empty<string>()).Where(x => history.AddPurchase(x)).ToList();
+            List<string> newMake = (intent.make ?? Array.Empty<string>()).Where(x => history.AddMake(x)).ToList();
 
             string query = $"{CompileItemIntent("I want to purchase", newPurchase)} {CompileItemIntent("I want to make", newMake)}".Trim();
 

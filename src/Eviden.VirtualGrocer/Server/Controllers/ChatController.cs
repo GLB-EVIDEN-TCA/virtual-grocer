@@ -1,10 +1,8 @@
 using System.Text.Json;
-using Azure.Search.Documents;
 using Eviden.VirtualGrocer.Web.Server.Skills;
 using Eviden.VirtualGrocer.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.AI.ChatCompletion;
 using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web.Resource;
@@ -27,8 +25,6 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
 
         public ChatController(
             IKernel semanticKernel,
-            SearchClient searchClient,
-            IConfiguration config,
             ILogger<ChatController> logger,
             ChatRepository chatRepo,
             ResultRepository resultRepo,
@@ -39,11 +35,6 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             _tokenCounter = tokenCounter;
             _semanticKernel = semanticKernel;
             _logger = logger;
-
-            //semanticKernel.ImportSkill(new QueryBuilderSkill(), "Inventory");
-            //semanticKernel.ImportSkill(new InventoryLookupSkill(searchClient), "Inventory");
-            //semanticKernel.ImportSkill(new RememberShoppingList(), "Inventory");
-            //semanticKernel.ImportSkill(new RenderOutput($"{config["Azure:Storage:ProductImagePath"]}"), "Inventory");
         }
 
         [HttpPost]
@@ -54,14 +45,10 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             // save user prompt to chat history (prompt)
             var history = await _chatRepo.GetAsync(prompt.ChatId);
 
-            // TODO: add chat history section to prompt, identify budget, concat history and submit with prompt!
-            // don't think adding chat history will work unless we add context inferrence, where 'I want to buy X' will set the context to 'buy'; further asking 'and Y' would reuse the previous context.
-
             SKContext? skContext = null;
             try
             {
                 ContextVariables variables = new ContextVariables(prompt.Prompt!);
-                //variables.Set("chatHistory", ExtractChatHistory(history));
                 variables.Set("chatId", prompt.ChatId);
                 variables.Set("chatHistory", ExtractUserChatHistory(history));
                 variables.Set("originalPrompt", prompt.Prompt!);
