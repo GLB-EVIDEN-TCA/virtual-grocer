@@ -22,7 +22,7 @@ To launch the application, you simply need to run the back-end API server.
 2. Run `dotnet build` to build the project.
 3. Run `dotnet watch InventoryPoc.Web/Server/InventoryPoc.Web.Server.csproj`
 
-> This will, for now, deploy the project locally to `localhost:5012`. In future implementation, we will set up ARM to deploy to a cluster.
+> This will, for now, deploy the project locally to `localhost:44321`. In future implementation, we will set up ARM to deploy to a cluster.
 
 ## Usage
 

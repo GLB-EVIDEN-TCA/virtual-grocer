@@ -24,6 +24,7 @@
     "Audience": "api://virtual-grocer",
     "Scopes": "chat",
     "Authority": "https://login.microsoftonline.com/61c2b580-8619-4baf-8040-bac4442e29a6",
+    "RedirectUri":"http://localhost:44321//signin-oidc",
     "ValidateAuthority": true
   }
 }
