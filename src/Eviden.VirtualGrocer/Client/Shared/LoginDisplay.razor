@@ -2,16 +2,46 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject NavigationManager Navigation
 
+<style>
+    .authorize-view-container {
+        /* Your styles here */
+        background-color: #f60000;
+        padding: 10px;
+    }
+</style>
+
 <AuthorizeView>
     <Authorized>
-        Hello, @context.User.Identity?.Name!
-        <a href="/cart">Cart</a>
-        <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
+        <div class="authorized-view">
+            Hello, @context.User.Identity?.Name!
+            <button class="nav-link btn btn-link btn-hover" @onclick="BeginLogOut">Log out</button>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/login">Log in</a>
+        <div class="not-authorized-view">
+            <a href="authentication/login">Log in</a>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
+
+<style>
+    .authorized-view {
+        /* Your styles for authorized view */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-hover:hover {
+        color: orange;
+    }
+
+    .not-authorized-view {
+        /* Your styles for not authorized view */
+        
+    }
+</style>
  
 @code{
     public void BeginLogOut()
