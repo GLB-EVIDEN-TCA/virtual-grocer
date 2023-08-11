@@ -19,7 +19,7 @@
     </Authorized>
     <NotAuthorized>
         <div class="not-authorized-view">
-            <a href="authentication/login">Log in</a>
+            <button class="nav-link btn btn-link btn-hover" @onclick="BeginLogIn">Log in</button>
         </div>
     </NotAuthorized>
 </AuthorizeView>
@@ -47,5 +47,10 @@
     public void BeginLogOut()
     {
         Navigation.NavigateToLogout("authentication/logout");
+    }
+
+    public void BeginLogIn()
+    {
+        Navigation.NavigateToLogout("authentication/login");
     }
 }
