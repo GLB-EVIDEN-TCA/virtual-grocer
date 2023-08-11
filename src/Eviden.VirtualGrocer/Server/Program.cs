@@ -10,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)!);
 
+// Register objects and services in the DI container
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+//builder.Services.AddSingleton<IConfiguration>(config);
+
+// Sign-in users with the Microsoft identity platform
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
+
+// Register Azure Cognitive and Search services
 var azureAiKey = config["Azure:OpenAI:ApiKey"];
 var azureAiEndpoint = config["Azure:OpenAI:Endpoint"];
 var azureAiModel = config["Azure:OpenAI:Model"];
@@ -17,16 +27,6 @@ var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
 var azureSearchKey = config["Azure:CognitiveSearch:QueryKey"];
 var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
 
-// Register objects and services in the DI container
-
-// Sign-in users with the Microsoft identity platform
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-
-builder.Services.AddSingleton<IConfiguration>(config);
 builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
 builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
 
