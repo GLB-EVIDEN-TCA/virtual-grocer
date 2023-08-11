@@ -13,7 +13,7 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
 {
     [ApiController]
     [Authorize]
-    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+    //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     [Route("[controller]")]
     public class ChatController : ControllerBase
     {

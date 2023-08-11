@@ -2,6 +2,7 @@
 @page "/chat"
 @inject HttpClient Http
 @inject IJSRuntime JsRuntime
+@attribute [Authorize]
 
 <div class="chat-container">
 	<div class="chat-messages">
