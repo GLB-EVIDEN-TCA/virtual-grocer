@@ -13,5 +13,5 @@
     "Storage": {
       "ProductImagePath": "https://genaipocstorage.blob.core.windows.net/ecommerce-poc/product-images/generic/"
     }
-  },
+  }
 }
