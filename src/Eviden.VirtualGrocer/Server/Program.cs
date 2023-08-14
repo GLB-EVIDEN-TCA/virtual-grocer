@@ -13,7 +13,7 @@ config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAsse
 // Register objects and services in the DI container
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-//builder.Services.AddSingleton<IConfiguration>(config);
+
 
 // Sign-in users with the Microsoft identity platform
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
