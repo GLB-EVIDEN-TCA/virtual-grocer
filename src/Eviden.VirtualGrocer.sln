@@ -5,7 +5,6 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{64EE2856-049C-4CAB-B732-A8D0E77B96AF}"
 	ProjectSection(SolutionItems) = preProject
-		config\AppCreationScripts.md = config\AppCreationScripts.md
 		config\Cleanup.ps1 = config\Cleanup.ps1
 		config\common.appsettings.Development.json = config\common.appsettings.Development.json
 		config\common.appsettings.json = config\common.appsettings.json
