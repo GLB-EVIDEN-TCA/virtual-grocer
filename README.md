@@ -35,4 +35,3 @@ To launch the application, you simply need to run the back-end server applicatio
 2. Type into the textbox to ask the chatbot any grocery-related questions you may have.
 
 
-
