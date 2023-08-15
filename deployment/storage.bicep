@@ -15,17 +15,24 @@ resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = 
     dnsEndpointType: 'Standard'
     defaultToOAuthAuthentication: false
     publicNetworkAccess: 'Enabled'
+    allowCrossTenantReplication: true
     minimumTlsVersion: 'TLS1_2'
     allowBlobPublicAccess: true
     allowSharedKeyAccess: true
     networkAcls: {
       bypass: 'AzureServices'
+      virtualNetworkRules: []
+      ipRules: []
       defaultAction: 'Allow'
     }
     supportsHttpsTrafficOnly: true
     encryption: {
       requireInfrastructureEncryption: false
       services: {
+        file: {
+          keyType: 'Account'
+          enabled: true
+        }
         blob: {
           keyType: 'Account'
           enabled: true
@@ -41,9 +48,18 @@ resource primaryStorageAccountBlob 'Microsoft.Storage/storageAccounts/blobServic
   parent: primaryStorageAccount
   name: 'default'
   properties: {
+    changeFeed: {
+      enabled: false
+    }
+    restorePolicy: {
+      enabled: false
+    }
     containerDeleteRetentionPolicy: {
       enabled: true
       days: 7
+    }
+    cors: {
+      corsRules: []
     }
     deleteRetentionPolicy: {
       allowPermanentDelete: false
@@ -58,6 +74,9 @@ resource productsContainer 'Microsoft.Storage/storageAccounts/blobServices/conta
   parent: primaryStorageAccountBlob
   name: 'products'
   properties: {
+    immutableStorageWithVersioning: {
+      enabled: false
+    }
     defaultEncryptionScope: '$account-encryption-key'
     denyEncryptionScopeOverride: false
     publicAccess: 'Blob'
