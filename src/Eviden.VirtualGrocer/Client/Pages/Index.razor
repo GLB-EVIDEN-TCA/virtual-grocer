@@ -156,9 +156,10 @@
 
 	}
 
-	private async Task AddToCart(Product product)
+	private Task AddToCart(Product product)
 	{
 		// Logic to add the product to the cart.
+		return Task.CompletedTask;
 	}
 
 	private async Task ClearMessages()

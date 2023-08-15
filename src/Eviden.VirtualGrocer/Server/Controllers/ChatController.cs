@@ -49,7 +49,7 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             SKContext? skContext = null;
             try
             {
-				ContextVariables variables = new ContextVariables(prompt.Prompt!);
+                ContextVariables variables = new ContextVariables(prompt.Prompt!);
                 variables.Set("chatId", prompt.ChatId);
                 variables.Set("chatHistory", ExtractUserChatHistory(history, prompt.Prompt!));
                 variables.Set("originalPrompt", prompt.Prompt!);
@@ -74,10 +74,10 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
                     }
                     else
                     {
-						errorMessage = skContext.LastException?.Message;
-					}
+                        errorMessage = skContext.LastException?.Message;
+                    }
 
-					return new ChatMessage(prompt.ChatId) { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
+                    return new ChatMessage(prompt.ChatId) { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
                 }
 
                 history.Add("User", prompt.Prompt!);
@@ -108,7 +108,7 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
         //  2. To save on token analysis - the bot response is pretty wordy, esp. for recipes.
         private string ExtractUserChatHistory(ChatHistory history, string currentPrompt)
         {
-			int budget = 1000;
+            int budget = 1000;
             string log = history.ConcatMessageHistory(_tokenCounter, budget, x => x.StartsWith("User")) + Environment.NewLine + $"User: {currentPrompt}";
             return log;
         }
