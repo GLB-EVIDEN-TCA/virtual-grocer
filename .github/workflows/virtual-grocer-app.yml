@@ -17,11 +17,11 @@ jobs:
       - uses: actions/checkout@v3
 
         # Log into Azure
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      #- uses: azure/login@v1
+      #  with:
+      #    creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        # Deploy Bicep file
+      # Deploy Bicep file
       - name: deploy
         uses: azure/arm-deploy@v1
         with:
