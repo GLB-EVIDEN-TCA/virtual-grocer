@@ -1,8 +1,5 @@
 name: Build and deploy .NET Core application to Web App virtual-grocer-app
-on:
-  push:
-    branches:
-      - "*"
+on: [push]
 env:
   AZURE_WEBAPP_NAME: virtual-grocer-app
   AZURE_WEBAPP_PACKAGE_PATH: ./published
