@@ -8,18 +8,18 @@ env:
   DOTNET_CORE_VERSION: 7.0.x
   WORKING_DIRECTORY: ./src
 jobs:
-  validate-bicep:
+  build-arm-template:
     runs-on: ubuntu-latest
     steps:
       # Checkout code
       - uses: actions/checkout@v3
 
-        # Log into Azure
+      # Log into Azure
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Deploy Bicep file
+      # Validate Bicep file
       - name: deploy
         uses: azure/arm-deploy@v1
         with:
@@ -30,6 +30,14 @@ jobs:
           failOnStdErr: true
           deploymentMode: "Validate"
           deploymentName: "virtual-grocer-deployment"
+
+      # Build ARM template
+      - uses: azure/cli@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            az bicep build --file ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.json
+            az bicep generate-params ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.parameters.json
   build-app:
     runs-on: ubuntu-latest
     steps:
