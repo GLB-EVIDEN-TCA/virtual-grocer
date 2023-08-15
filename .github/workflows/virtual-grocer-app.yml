@@ -37,6 +37,7 @@ jobs:
         with:
           inlineScript: |
             #!/bin/bash
+            mkdir -p ./template
             az bicep build --file ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.json
             az bicep generate-params ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.parameters.json
   build-app:
