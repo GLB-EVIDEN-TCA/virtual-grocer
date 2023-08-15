@@ -106,7 +106,7 @@ module openAImodule 'openAI.bicep' = {
   ]
 }
 
-/*module appServiceModule 'appService.bicep' = {
+module appServiceModule 'appService.bicep' = {
   name: '${deployment().name}-app'
   params: {
     webAppName: webAppName
