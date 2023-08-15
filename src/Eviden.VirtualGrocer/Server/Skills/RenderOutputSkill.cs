@@ -34,7 +34,7 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
 
             RenderOutputResult output = (recipes.Any(), products.Any(), result.OtherContent.Any()) switch
             {
-                (false, false, true) => new ChatMessage(chatId) { PreContent = result.OtherContent.First(), IsError = true },
+                (false, false, true) => new ChatMessage(chatId) { ErrorMessage = result.OtherContent.First(), IsError = true },
                 (false, false, _) => new ChatMessage(chatId) { InventoryContent = "We don't have any of the required ingredients in stock" },
                 (false, true, _) => new ChatMessage(chatId) { InventoryContent = "These are items we have in stock related to your ask.", Products = products },
                 (true, false, _) => new ChatMessage(chatId) { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "We don't have any of the required ingredients in stock" },
