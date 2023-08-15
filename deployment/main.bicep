@@ -36,6 +36,7 @@ module cognitiveServicesModule 'cognitiveServices.bicep' = {
     servicesLocation: location
     searchServiceName: 'product-search-${uniqueString(rg.id)}'
     openAIserviceName: 'grocer-gpt-${uniqueString(rg.id)}'
+    searchServiceSku: 'basic'
   }
   scope: rg
 }
@@ -48,10 +49,13 @@ module cognitiveServicesModule 'cognitiveServices.bicep' = {
   scope: rg
 }*/
 
-/*module appServiceModule 'appService.bicep' = {
+module appServiceModule 'appService.bicep' = {
   name: '${deployment().name}-app'
   params: {
-    servicesLocation: location
+    webAppName: 'app-virtual-grocer-${uniqueString(rg.id)}'
+    appServicePlanName: 'plan-virtual-grocer-${uniqueString(rg.id)}'
+    webAppLocation: location
+    appServiceSku: 'B1'
   }
   scope: rg
-}*/
+}
