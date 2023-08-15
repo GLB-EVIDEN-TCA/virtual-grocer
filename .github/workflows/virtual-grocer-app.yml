@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 env:
   AZURE_WEBAPP_PACKAGE_PATH: ./published
+  AZURE_TEMPLATE_PATH: ./template
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 7.0.x
   WORKING_DIRECTORY: ./src
@@ -37,9 +38,15 @@ jobs:
         with:
           inlineScript: |
             #!/bin/bash
-            mkdir -p ./template
-            az bicep build --file ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.json
-            az bicep generate-params --file ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.parameters.json
+            mkdir -p ${{ env.AZURE_TEMPLATE_PATH }}
+            az bicep build --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/EvidenVirtualGrocer.json"
+            az bicep generate-params --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/EvidenVirtualGrocer.parameters.json"
+
+      - name: Publish Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: template
+          path: ${{ env.AZURE_TEMPLATE_PATH }}
   build-app:
     runs-on: ubuntu-latest
     steps:
