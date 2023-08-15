@@ -1,13 +1,13 @@
 {
   "Azure": {
     "OpenAI": {
-      "ApiKey": "c50be6ac8e184084a51d209ae6cca179",
+      "ApiKey": "",
       "Endpoint": "https://invpoc-gpt.openai.azure.com/",
       "Model": "invpoc-dep1"
     },
     "CognitiveSearch": {
+      "QueryKey": "",
       "Endpoint": "https://inventory-poc-cog-search.search.windows.net",
-      "QueryKey": "UmAsXiiEsXuJBrhbiiqzYfWaX9QhUpLDAvD99xe6D5AzSeDHKsuD",
       "Index": "products"
     },
     "Storage": {
