@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Web App virtual-grocer-app
 on:
   push:
     branches:
-      - feature/template
+      - "*"
 env:
   AZURE_WEBAPP_NAME: virtual-grocer-app
   AZURE_WEBAPP_PACKAGE_PATH: ./published
@@ -10,18 +10,18 @@ env:
   DOTNET_CORE_VERSION: 7.0.x
   WORKING_DIRECTORY: ./src
 jobs:
-  validate-bicep:
+  build-arm-template:
     runs-on: ubuntu-latest
     steps:
       # Checkout code
       - uses: actions/checkout@v3
 
-        # Log into Azure
+      # Log into Azure
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Deploy Bicep file
+      # Validate Bicep file
       - name: deploy
         uses: azure/arm-deploy@v1
         with:
@@ -32,6 +32,14 @@ jobs:
           failOnStdErr: true
           deploymentMode: "Validate"
           deploymentName: "virtual-grocer-deployment"
+
+      # Build ARM template
+      - uses: azure/cli@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            az bicep build --file ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.json
+            az bicep generate-params ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.parameters.json
   build-app:
     runs-on: ubuntu-latest
     steps:
@@ -53,3 +61,42 @@ jobs:
         with:
           name: webapp
           path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+  deploy-infra:
+    #if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v3
+
+      # Log into Azure
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Deploy Bicep file
+      - name: deploy
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ secrets.AZURE_RG }}
+          template: ./deployment/main.bicep
+          #parameters: "storagePrefix=mystore storageSKU=Standard_LRS"
+          failOnStdErr: true
+          deploymentMode: "Incremental"
+          deploymentName: "virtual-grocer-deployment"
+  deploy-app:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: [build-app, deploy-infra]
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: webapp
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Deploy to Azure WebApp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.virtual_grocer_app_75AD }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
