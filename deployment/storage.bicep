@@ -26,6 +26,8 @@ resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = 
     allowSharedKeyAccess: true
     networkAcls: {
       bypass: 'AzureServices'
+      virtualNetworkRules: []
+      ipRules: []
       defaultAction: 'Allow'
     }
     supportsHttpsTrafficOnly: true
@@ -60,6 +62,9 @@ resource primaryStorageAccountBlob 'Microsoft.Storage/storageAccounts/blobServic
     containerDeleteRetentionPolicy: {
       enabled: true
       days: 7
+    }
+    cors: {
+      corsRules: []
     }
     deleteRetentionPolicy: {
       allowPermanentDelete: false
