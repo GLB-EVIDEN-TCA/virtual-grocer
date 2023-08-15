@@ -1,4 +1,4 @@
-targetScope = 'subscription'
+targetScope = 'resourceGroup'
 
 @description('Azure location for all resources')
 param location string = 'eastus'
@@ -60,7 +60,6 @@ param appServiceSku string = 'B1'
   params: {
     location: location
   }
-  scope: rg
 }*/
 
 module configurationModule 'configuration.bicep' = {
@@ -77,7 +76,6 @@ module storageModule 'storage.bicep' = {
     storageAccountName: storageAccountName
     location: location
   }
-  scope: rg
 }
 
 module cognitiveSearchModule 'cognitiveSearch.bicep' = {
