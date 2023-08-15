@@ -73,6 +73,6 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
                     PreContent = "Woah, I did not expect you to say that. Try asking something else!",
                     IsError = true
                 };
-            }
+}
         }
     }
