@@ -2,7 +2,7 @@
 param primaryStorageAccountName string
 
 @description('Azure Location for the Storage Account')
-param primaryStorageAccountLocation string = 'eastus'
+param primaryStorageAccountLocation string = resourceGroup().location
 
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: primaryStorageAccountName
@@ -63,3 +63,5 @@ resource productsContainer 'Microsoft.Storage/storageAccounts/blobServices/conta
     publicAccess: 'Blob'
   }
 }
+
+output productContainerPath string = 'https://${primaryStorageAccountName}.blob.${environment().suffixes.storage}/products/images/'
