@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Web App virtual-grocer-app
+name: Build and Deploy Virtual Grocer application to Azure
 on: [push]
 env:
   AZURE_WEBAPP_NAME: virtual-grocer-app
@@ -36,6 +36,7 @@ jobs:
         with:
           inlineScript: |
             #!/bin/bash
+            mkdir -p ./template
             az bicep build --file ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.json
             az bicep generate-params ./deployment/main.bicep --outfile ./template/EvidenVirtualGrocer.parameters.json
   build-app:
