@@ -53,8 +53,8 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
                     }
                     else
                     {
-						errorMessage = skContext.LastException?.Message;
-					}
+                        errorMessage = skContext.LastException?.Message;
+                    }
 
 					return new ChatMessage { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
                 }               
@@ -76,4 +76,3 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             }
         }
     }
-}
