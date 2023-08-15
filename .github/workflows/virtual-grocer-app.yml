@@ -40,7 +40,7 @@ jobs:
             #!/bin/bash
             mkdir -p ${{ env.AZURE_TEMPLATE_PATH }}
             az bicep build --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/EvidenVirtualGrocer.json"
-            az bicep generate-params --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/EvidenVirtualGrocer.json"
+            az bicep generate-params --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/EvidenVirtualGrocer.parameters.json"
 
       - name: Publish Artifacts
         uses: actions/upload-artifact@v3
