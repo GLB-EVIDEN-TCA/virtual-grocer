@@ -1,38 +1,43 @@
-﻿targetScope = 'resourceGroup'
+targetScope = 'subscription'
 
-@description('Base name for the application and resources')
+@description('Base name for the application and all resources')
 @minLength(2)
 param resourceBaseName string = 'eviden-virtual-grocer'
 
-@description('Azure location for all resources')
+@description('Azure Location for all resources')
 param location string = 'eastus'
 
-var uniqueSuffix = uniqueString(resourceGroup().id)
+resource rg 'Microsoft.Resources/resourceGroups@2021-01-01' = {
+  name: resourceBaseName
+  location: location
+}
 
 /*module azureSSO 'azureSSO.bicep' = {
   name: '${deployment().name}-sso'
   params: {
-    primaryStorageAccountName: '${take(replace(resourceBaseName, '-', ''), 11)}${uniqueId}'
+    primaryStorageAccountName: '${take(replace(resourceBaseName, '-', ''), 11)}${uniqueString(rg.id)}'
     primaryStorageAccountLocation: location
   }
+  scope: rg
 }*/
 
 module storageModule 'storage.bicep' = {
   name: '${deployment().name}-storage'
   params: {
-    primaryStorageAccountName: '${take(replace(resourceBaseName, '-', ''), 11)}${uniqueSuffix}'
+    primaryStorageAccountName: '${take(replace(resourceBaseName, '-', ''), 11)}${uniqueString(rg.id)}'
     primaryStorageAccountLocation: location
   }
+  scope: rg
 }
 
 module cognitiveServicesModule 'cognitiveServices.bicep' = {
   name: '${deployment().name}-cognitive'
   params: {
     servicesLocation: location
-    searchServiceName: 'product-search-${uniqueSuffix}'
-    openAIserviceName: 'grocer-gpt-${uniqueSuffix}'
-    searchServiceSku: 'basic'
+    searchServiceName: 'product-search-${uniqueString(rg.id)}'
+    openAIserviceName: 'grocer-gpt-${uniqueString(rg.id)}'
   }
+  scope: rg
 }
 
 /*module configurationModule 'configuration.bicep' = {
@@ -40,14 +45,13 @@ module cognitiveServicesModule 'cognitiveServices.bicep' = {
   params: {
     servicesLocation: location
   }
+  scope: rg
 }*/
 
-module appServiceModule 'appService.bicep' = {
+/*module appServiceModule 'appService.bicep' = {
   name: '${deployment().name}-app'
   params: {
-    webAppName: 'app-virtual-grocer-${uniqueSuffix}'
-    appServicePlanName: 'plan-virtual-grocer-${uniqueSuffix}'
-    webAppLocation: location
-    appServiceSku: 'B1'
+    servicesLocation: location
   }
-}
+  scope: rg
+}*/
