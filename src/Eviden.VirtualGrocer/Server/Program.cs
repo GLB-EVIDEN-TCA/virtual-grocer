@@ -2,6 +2,7 @@ using Eviden.VirtualGrocer.Web.Server;
 using Eviden.VirtualGrocer.Web.Server.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using Eviden.VirtualGrocer.Web.Server.Skills.History;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,9 @@ var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
 
 builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
 builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
+builder.Services.AddSingleton<ITokenCounter, TokenCounter>();
+builder.Services.AddSingleton(sp => new ChatRepository(new MemoryStorageContext<ChatHistory>()));
+builder.Services.AddSingleton(sp => new ResultRepository(new MemoryStorageContext<ResultHistory>()));
 
 var app = builder.Build();
 
