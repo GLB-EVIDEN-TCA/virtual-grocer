@@ -4,13 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Eviden.VirtualGrocer.Web.Server.Skills.History;
 using System.Reflection;
-using Azure.Security.KeyVault.Secrets;
 using Azure.Identity;
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
-using System.Diagnostics;
-using Azure.Search.Documents.Indexes.Models;
-using System.Linq.Expressions;
-using Azure.Security.KeyVault.Certificates;
 
 
 var builder = WebApplication.CreateBuilder(args);
