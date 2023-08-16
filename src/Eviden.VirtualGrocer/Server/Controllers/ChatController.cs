@@ -7,6 +7,7 @@ using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web.Resource;
 using Eviden.VirtualGrocer.Web.Server.Skills.History;
+using Microsoft.Identity.Client;
 
 namespace Eviden.VirtualGrocer.Web.Server.Controllers
 {
@@ -48,9 +49,9 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             SKContext? skContext = null;
             try
             {
-                ContextVariables variables = new ContextVariables(prompt.Prompt!);
+				ContextVariables variables = new ContextVariables(prompt.Prompt!);
                 variables.Set("chatId", prompt.ChatId);
-                variables.Set("chatHistory", ExtractUserChatHistory(history));
+                variables.Set("chatHistory", ExtractUserChatHistory(history, prompt.Prompt!));
                 variables.Set("originalPrompt", prompt.Prompt!);
 
                 //Call Semantic Kernel
@@ -102,10 +103,13 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             }
         }
 
-        private string ExtractUserChatHistory(Skills.History.ChatHistory history)
+        // We only extract the *user* chat history here for two reasons:
+        //  1. The bot response really doesn't matter when trying to figure out the *user* intent
+        //  2. To save on token analysis - the bot response is pretty wordy, esp. for recipes.
+        private string ExtractUserChatHistory(ChatHistory history, string currentPrompt)
         {
-            int budget = 1000;
-            string log = history.ConcatMessageHistory(_tokenCounter, budget, x => x.StartsWith("User"));
+			int budget = 1000;
+            string log = history.ConcatMessageHistory(_tokenCounter, budget, x => x.StartsWith("User")) + Environment.NewLine + $"User: {currentPrompt}";
             return log;
         }
     }
