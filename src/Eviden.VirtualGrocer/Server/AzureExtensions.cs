@@ -1,6 +1,9 @@
 ﻿using Azure;
+using Azure.AI.OpenAI;
 using Azure.Search.Documents;
 using Eviden.VirtualGrocer.Web.Server.Skills;
+using Eviden.VirtualGrocer.Web.Server.Skills.History;
+using Microsoft.Extensions.Azure;
 using Microsoft.SemanticKernel;
 
 namespace Eviden.VirtualGrocer.Web.Server
@@ -32,8 +35,7 @@ namespace Eviden.VirtualGrocer.Web.Server
             services.AddScoped(
                 sp =>
                 {
-                    IKernel kernel = KernelBuilder.Create();
-                    kernel.Config.AddAzureTextCompletionService(model, endpoint, key);
+                    IKernel kernel = Kernel.Builder.WithAzureTextCompletionService(model, endpoint, key).Build();
                     sp.GetRequiredService<RegisterSkillsWithKernel>()(sp, kernel);
 
                     return kernel;
@@ -48,10 +50,13 @@ namespace Eviden.VirtualGrocer.Web.Server
         {
             kernel.AddEmbeddedSkills();
 
-            kernel.ImportSkill(new QueryBuilderSkill(), "Inventory");
-            kernel.ImportSkill(new InventoryLookupSkill(sp.GetRequiredService<SearchClient>()), "Inventory");
-            kernel.ImportSkill(new RememberShoppingList(), "Inventory");
-            kernel.ImportSkill(new RenderOutput($"{sp.GetRequiredService<IConfiguration>()["Azure:Storage:ProductImagePath"]}"), "Inventory");
+            //kernel.ImportSkill(new QueryBuilderSkill(), "Inventory");
+            kernel.ImportSkill(new InventorySearchSkill(sp.GetRequiredService<SearchClient>()), "Inventory");
+            kernel.ImportSkill(new RememberShoppingListSkill(), "Inventory");
+            kernel.ImportSkill(
+                new RenderOutputSkill(
+                    sp.GetRequiredService<ResultRepository>(),
+                    $"{sp.GetRequiredService<IConfiguration>()["Azure:Storage:ProductImagePath"]}"), "Inventory");
 
             return Task.CompletedTask;
         }
