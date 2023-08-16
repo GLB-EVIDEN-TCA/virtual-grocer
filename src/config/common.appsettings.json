@@ -17,6 +17,9 @@
       "Authority": "https://login.microsoftonline.com/61c2b580-8619-4baf-8040-bac4442e29a6",
       "ClientId": "",
       "ValidateAuthority": true
+    },
+    "AzureKeyVault": {
+      "Uri": "https://evidenvirtualgrocer.vault.azure.net/"
     }
   }
 }

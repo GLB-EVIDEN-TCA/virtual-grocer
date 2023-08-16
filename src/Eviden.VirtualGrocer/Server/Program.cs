@@ -19,6 +19,27 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)!);
 
+
+var keyVaultUri = config["Azure:AzureKeyVault:Uri"];
+config.AddAzureKeyVault(
+    new Uri(keyVaultUri!),
+    new DefaultAzureCredential()
+);
+
+// Register Azure Cognitive and Search services
+var azureAiKey = config["azure-openai-key"];
+var azureAiEndpoint = config["Azure:OpenAI:Endpoint"];
+var azureAiModel = config["Azure:OpenAI:Model"];
+var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
+var azureSearchKey = config["cognitive-search-key"];
+var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
+
+builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
+builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
+builder.Services.AddSingleton<ITokenCounter, TokenCounter>();
+builder.Services.AddSingleton(sp => new ChatRepository(new MemoryStorageContext<ChatHistory>()));
+builder.Services.AddSingleton(sp => new ResultRepository(new MemoryStorageContext<ResultHistory>()));
+
 // Register objects and services in the DI container
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -27,40 +48,6 @@ builder.Services.AddRazorPages();
 // Sign-in users with the Microsoft identity platform
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
-
-builder.Configuration.AddAzureKeyVault(
-    new Uri($"https://evidenvirtualgrocer.vault.azure.net/"),
-    new DefaultAzureCredential(new DefaultAzureCredentialOptions
-    {
-        ManagedIdentityClientId = "{System Assigned ObjectID goes here}"
-    }));
-
-
-var client = new SecretClient(new Uri($"https://evidenvirtualgrocer.vault.azure.net/"), new DefaultAzureCredential());
-var azureAiKeyResponse = await client.GetSecretAsync("invpoc-gpt-key");
-var azureAiEndpointResponse = await client.GetSecretAsync("invpoc-gpt-endpoint");
-var azureSearchKeyResponse = await client.GetSecretAsync("cognitive-search-key");
-
-string azureAiKey = azureAiKeyResponse.ToString();
-string azureAiEndpoint = azureAiEndpointResponse.ToString();
-string azureSearchKey = azureSearchKeyResponse.ToString();
-
-
-Trace.WriteLine(azureAiKey);
-
-// Register Azure Cognitive and Search services
-//var azureAiKey = config["Azure:OpenAI:ApiKey"];
-//var azureAiEndpoint = config["Azure:OpenAI:Endpoint"];
-var azureAiModel = config["Azure:OpenAI:Model"];
-var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
-//var azureSearchKey = config["Azure:CognitiveSearch:QueryKey"];
-var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
-
-builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
-builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
-builder.Services.AddSingleton<ITokenCounter, TokenCounter>();
-builder.Services.AddSingleton(sp => new ChatRepository(new MemoryStorageContext<ChatHistory>()));
-builder.Services.AddSingleton(sp => new ResultRepository(new MemoryStorageContext<ResultHistory>()));
 
 var app = builder.Build();
 
