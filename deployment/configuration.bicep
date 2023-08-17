@@ -32,5 +32,6 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
       defaultAction: 'Allow'
       bypass: 'AzureServices'
     }
+    accessPolicies: []
   }
 }

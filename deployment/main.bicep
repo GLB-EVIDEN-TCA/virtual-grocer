@@ -43,6 +43,9 @@ module cognitiveSearchModule 'cognitiveSearch.bicep' = {
     searchServiceSku: 'basic'
     keyVaultName: resourceName24
   }
+  dependsOn: [
+    configurationModule
+  ]
 }
 
 module openAImodule 'openAI.bicep' = {
@@ -52,6 +55,9 @@ module openAImodule 'openAI.bicep' = {
     openAIserviceName: 'grocer-gpt-${uniqueSuffix}'
     keyVaultName: resourceName24
   }
+  dependsOn: [
+    configurationModule
+  ]
 }
 
 module appServiceModule 'appService.bicep' = {
@@ -62,4 +68,7 @@ module appServiceModule 'appService.bicep' = {
     webAppLocation: location
     appServiceSku: 'B1'
   }
+  dependsOn: [
+    configurationModule
+  ]
 }
