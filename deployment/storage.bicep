@@ -4,9 +4,6 @@ param primaryStorageAccountName string
 @description('Azure Location for the Storage Account')
 param location string = resourceGroup().location
 
-@description('UTC timestamp used to create distinct deployment scripts for each deployment')
-param utcValue string = utcNow()
-
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: primaryStorageAccountName
   location: location
@@ -87,7 +84,7 @@ resource productsContainer 'Microsoft.Storage/storageAccounts/blobServices/conta
 }
 
 resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'deployscript-upload-blob-${utcValue}'
+  name: 'deployscript-upload-product-index'
   location: location
   kind: 'AzureCLI'
   properties: {
