@@ -25,13 +25,20 @@ module storageModule 'storage.bicep' = {
   }
 }
 
-module cognitiveServicesModule 'cognitiveServices.bicep' = {
+module cognitiveSearchModule 'cognitiveSearch.bicep' = {
   name: '${deployment().name}-cognitive'
   params: {
-    servicesLocation: location
+    location: location
     searchServiceName: 'product-search-${uniqueSuffix}'
-    openAIserviceName: 'grocer-gpt-${uniqueSuffix}'
     searchServiceSku: 'basic'
+  }
+}
+
+module openAImodule 'openAI.bicep' = {
+  name: '${deployment().name}-openai'
+  params: {
+    location: location
+    openAIserviceName: 'grocer-gpt-${uniqueSuffix}'
   }
 }
 
