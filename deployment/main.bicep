@@ -1,13 +1,15 @@
-targetScope = 'resourceGroup'
+﻿targetScope = 'resourceGroup'
 
 @description('Base name for the application and resources')
 @minLength(2)
-param resourceBaseName string = 'eviden-virtual-grocer'
+param resourceBaseName string = 'virtual-grocer'
 
 @description('Azure location for all resources')
 param location string = 'eastus'
 
 var uniqueSuffix = uniqueString(resourceGroup().id)
+var resourceName24 = take(resourceBaseName, 11)
+// + uniqueSuffix
 
 /*module azureSSO 'azureSSO.bicep' = {
   name: '${deployment().name}-sso'
@@ -20,7 +22,7 @@ var uniqueSuffix = uniqueString(resourceGroup().id)
 module configurationModule 'configuration.bicep' = {
   name: '${deployment().name}-configuration'
   params: {
-    keyVaultName: '${resourceBaseName}-${uniqueSuffix}'
+    keyVaultName: resourceName24
     location: location
   }
 }
@@ -39,7 +41,7 @@ module cognitiveSearchModule 'cognitiveSearch.bicep' = {
     location: location
     searchServiceName: 'product-search-${uniqueSuffix}'
     searchServiceSku: 'basic'
-    keyVaultName: '${resourceBaseName}-${uniqueSuffix}'
+    keyVaultName: resourceName24
   }
 }
 
@@ -48,7 +50,7 @@ module openAImodule 'openAI.bicep' = {
   params: {
     location: location
     openAIserviceName: 'grocer-gpt-${uniqueSuffix}'
-    keyVaultName: '${resourceBaseName}-${uniqueSuffix}'
+    keyVaultName: resourceName24
   }
 }
 
