@@ -49,7 +49,7 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             SKContext? skContext = null;
             try
             {
-                ContextVariables variables = new ContextVariables(prompt.Prompt!);
+				ContextVariables variables = new ContextVariables(prompt.Prompt!);
                 variables.Set("chatId", prompt.ChatId);
                 variables.Set("chatHistory", ExtractUserChatHistory(history, prompt.Prompt!));
                 variables.Set("originalPrompt", prompt.Prompt!);
@@ -74,45 +74,43 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
                     }
                     else
                     {
-                        errorMessage = skContext.LastException?.Message;
-                    }
-                    errorMessage = skContext.LastException?.Message;
-                }
+						errorMessage = skContext.LastException?.Message;
+					}
 
-                return new ChatMessage(prompt.ChatId) { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
-            }
+					return new ChatMessage(prompt.ChatId) { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
+                }
 
                 history.Add("User", prompt.Prompt!);
 
-            // save response to chat history (skContext.Result)
-            history.Add("Bot", skContext.Result!);
-            await _chatRepo.StashAsync(history);
+                // save response to chat history (skContext.Result)
+                history.Add("Bot", skContext.Result!);
+                await _chatRepo.StashAsync(history);
 
-            return JsonSerializer.Deserialize<ChatMessage>(skContext.Result) ?? new ChatMessage(prompt.ChatId);
-        }
+                return JsonSerializer.Deserialize<ChatMessage>(skContext.Result) ?? new ChatMessage(prompt.ChatId);
+            }
             catch (Exception ex)
             {
                 if (skContext != null)
                 {
                     return new ChatMessage(prompt.ChatId) { PreContent = skContext.Result, IsError = true, ErrorMessage = ex.ToString() };
-    }
+                }
 
                 return new ChatMessage(prompt.ChatId)
-    {
-        PreContent = "Woah, I did not expect you to say that. Try asking something else!",
+                {
+                    PreContent = "Woah, I did not expect you to say that. Try asking something else!",
                     IsError = true
                 };
-}
+            }
         }
 
         // We only extract the *user* chat history here for two reasons:
         //  1. The bot response really doesn't matter when trying to figure out the *user* intent
         //  2. To save on token analysis - the bot response is pretty wordy, esp. for recipes.
         private string ExtractUserChatHistory(ChatHistory history, string currentPrompt)
-{
-    int budget = 1000;
-    string log = history.ConcatMessageHistory(_tokenCounter, budget, x => x.StartsWith("User")) + Environment.NewLine + $"User: {currentPrompt}";
-    return log;
-}
+        {
+			int budget = 1000;
+            string log = history.ConcatMessageHistory(_tokenCounter, budget, x => x.StartsWith("User")) + Environment.NewLine + $"User: {currentPrompt}";
+            return log;
+        }
     }
 }
