@@ -13,8 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)!);
 
-
-var keyVaultUri = config["Azure:AzureKeyVault:Uri"];
+// Register Azure KeyVault
+var keyVaultUri = config["Azure:KeyVault:Uri"];
 config.AddAzureKeyVault(
     new Uri(keyVaultUri!),
     new DefaultAzureCredential()
@@ -28,20 +28,19 @@ var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
 var azureSearchKey = config["cognitive-search-key"];
 var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
 
+// Register objects and services in the DI container
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+// Sign-in users with the Microsoft identity platform
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
+
 builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
 builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
 builder.Services.AddSingleton<ITokenCounter, TokenCounter>();
 builder.Services.AddSingleton(sp => new ChatRepository(new MemoryStorageContext<ChatHistory>()));
 builder.Services.AddSingleton(sp => new ResultRepository(new MemoryStorageContext<ResultHistory>()));
-
-// Register objects and services in the DI container
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-
-
-// Sign-in users with the Microsoft identity platform
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
 
 var app = builder.Build();
 
