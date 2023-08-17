@@ -21,7 +21,7 @@ module storageModule 'storage.bicep' = {
   name: '${deployment().name}-storage'
   params: {
     primaryStorageAccountName: '${take(replace(resourceBaseName, '-', ''), 11)}${uniqueSuffix}'
-    primaryStorageAccountLocation: location
+    location: location
   }
 }
 
