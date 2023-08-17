@@ -4,6 +4,9 @@ param location string = resourceGroup().location
 @description('Name for the Product Search Service')
 param openAIserviceName string = 'grocer-gpt'
 
+@description('Specifies the name of the key vault.')
+param keyVaultName string
+
 resource openAIaccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openAIserviceName
   location: location
@@ -35,6 +38,19 @@ resource openAIdeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
       name: 'text-davinci-003'
       version: '1'
     }
+  }
+}
+
+resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: keyVaultName
+}
+
+resource openAIkey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  parent: keyVault
+  name: 'azure-openai-key'
+  properties: {
+    contentType: 'Azure OpenAI Key'
+    value: openAIaccount.listKeys().key1
   }
 }
 

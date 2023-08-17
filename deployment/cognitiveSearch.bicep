@@ -16,6 +16,9 @@ param searchServiceName string = 'product-search'
 @description('The pricing tier of the search service you want to create (for example, basic or standard).')
 param searchServiceSku string = 'basic'
 
+@description('Specifies the name of the key vault.')
+param keyVaultName string
+
 resource searchService 'Microsoft.Search/searchServices@2022-09-01' = {
   name: searchServiceName
   location: location
@@ -39,6 +42,19 @@ resource searchService 'Microsoft.Search/searchServices@2022-09-01' = {
         aadAuthFailureMode: 'http401WithBearerChallenge'
       }
     }
+  }
+}
+
+resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: keyVaultName
+}
+
+resource searchServiceKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  parent: keyVault
+  name: 'cognitive-search-key'
+  properties: {
+    contentType: 'Cognitive Search Key'
+    value: searchService.listQueryKeys().value[0].key
   }
 }
 

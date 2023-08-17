@@ -17,6 +17,14 @@ var uniqueSuffix = uniqueString(resourceGroup().id)
   }
 }*/
 
+module configurationModule 'configuration.bicep' = {
+  name: '${deployment().name}-configuration'
+  params: {
+    keyVaultName: '${resourceBaseName}-${uniqueSuffix}'
+    location: location
+  }
+}
+
 module storageModule 'storage.bicep' = {
   name: '${deployment().name}-storage'
   params: {
@@ -31,6 +39,7 @@ module cognitiveSearchModule 'cognitiveSearch.bicep' = {
     location: location
     searchServiceName: 'product-search-${uniqueSuffix}'
     searchServiceSku: 'basic'
+    keyVaultName: '${resourceBaseName}-${uniqueSuffix}'
   }
 }
 
@@ -39,21 +48,15 @@ module openAImodule 'openAI.bicep' = {
   params: {
     location: location
     openAIserviceName: 'grocer-gpt-${uniqueSuffix}'
+    keyVaultName: '${resourceBaseName}-${uniqueSuffix}'
   }
 }
-
-/*module configurationModule 'configuration.bicep' = {
-  name: '${deployment().name}-configuration'
-  params: {
-    servicesLocation: location
-  }
-}*/
 
 module appServiceModule 'appService.bicep' = {
   name: '${deployment().name}-app'
   params: {
-    webAppName: 'app-virtual-grocer-${uniqueSuffix}'
-    appServicePlanName: 'plan-virtual-grocer-${uniqueSuffix}'
+    webAppName: 'app-${resourceBaseName}-${uniqueSuffix}'
+    appServicePlanName: 'plan-${resourceBaseName}-${uniqueSuffix}'
     webAppLocation: location
     appServiceSku: 'B1'
   }
