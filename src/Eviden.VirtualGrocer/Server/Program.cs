@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Eviden.VirtualGrocer.Web.Server.Skills.History;
 using System.Reflection;
+using Azure.Identity;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,22 +13,28 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)!);
 
+// Register Azure KeyVault
+var keyVaultUri = config["Azure:KeyVault:Uri"];
+config.AddAzureKeyVault(
+    new Uri(keyVaultUri!),
+    new DefaultAzureCredential()
+);
+
+// Register Azure Cognitive and Search services
+var azureAiKey = config["azure-openai-key"];
+var azureAiEndpoint = config["Azure:OpenAI:Endpoint"];
+var azureAiModel = config["Azure:OpenAI:Model"];
+var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
+var azureSearchKey = config["cognitive-search-key"];
+var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
+
 // Register objects and services in the DI container
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-
 // Sign-in users with the Microsoft identity platform
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(config.GetSection("AzureAd"));
-
-// Register Azure Cognitive and Search services
-var azureAiKey = config["Azure:OpenAI:ApiKey"];
-var azureAiEndpoint = config["Azure:OpenAI:Endpoint"];
-var azureAiModel = config["Azure:OpenAI:Model"];
-var azureSearchEndpoint = config["Azure:CognitiveSearch:Endpoint"];
-var azureSearchKey = config["Azure:CognitiveSearch:QueryKey"];
-var azureSearchIndex = config["Azure:CognitiveSearch:Index"];
 
 builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
 builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
@@ -61,3 +69,4 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
