@@ -23,6 +23,7 @@ jobs:
       - name: Validate
         uses: azure/arm-deploy@v1
         with:
+          scope: resourcegroup
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.AZURE_RG }}
           template: ./deployment/main.bicep

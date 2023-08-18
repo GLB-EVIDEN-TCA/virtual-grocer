@@ -1,4 +1,4 @@
-﻿@description('Specifies the name of the key vault.')
+@description('Specifies the name of the key vault.')
 param keyVaultName string
 
 @description('Specifies the Azure location where the key vault should be created.')
@@ -22,10 +22,11 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
       family: 'A'
       name: skuName
     }
+    tenantId: tenantId
     enabledForDeployment: true
     enabledForDiskEncryption: true
     enabledForTemplateDeployment: true
-    tenantId: tenantId
+    enableRbacAuthorization: true
     enableSoftDelete: true
     softDeleteRetentionInDays: 90
     networkAcls: {
