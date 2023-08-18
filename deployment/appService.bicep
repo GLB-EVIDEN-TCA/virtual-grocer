@@ -10,6 +10,9 @@ param webAppLocation string = resourceGroup().location
 @description('The SKU of App Service Plan.')
 param appServiceSku string = 'B1'
 
+@description('Specifies the name of the key vault.')
+param keyVaultName string
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: appServicePlanName
   location: webAppLocation
@@ -187,5 +190,29 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
     hostNameType: 'Verified'
   }
 }*/
+
+resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: keyVaultName
+}
+
+@description('This is the built-in Key Vault Secrets User role. See https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#key-vault-secrets-user')
+resource keyVaultSecretsUserRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+  scope: keyVault
+  name: '4633458b-17de-408a-b874-0445c86b69e6'
+}
+
+resource indexContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: keyVault
+  name: guid(resourceGroup().id)
+  properties: {
+    roleDefinitionId: keyVaultSecretsUserRoleDefinition.id
+    principalId: webApp.identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+  dependsOn: [
+    keyVault
+    keyVaultSecretsUserRoleDefinition
+  ]
+}
 
 output webAppUrl string = '${webAppName}.azurewebsites.net'

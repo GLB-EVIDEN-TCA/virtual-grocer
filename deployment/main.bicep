@@ -1,4 +1,4 @@
-targetScope = 'resourceGroup'
+﻿targetScope = 'resourceGroup'
 
 @description('Base name for the application and resources')
 @minLength(2)
@@ -66,6 +66,7 @@ module appServiceModule 'appService.bicep' = {
     appServicePlanName: 'plan-${resourceBaseName}-${uniqueSuffix}'
     webAppLocation: location
     appServiceSku: 'B1'
+    keyVaultName: resourceName24
   }
   dependsOn: [
     configurationModule
