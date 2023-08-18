@@ -72,3 +72,5 @@ module appServiceModule 'appService.bicep' = {
     configurationModule
   ]
 }
+
+output appServiceName string = 'app-${resourceBaseName}-${uniqueSuffix}'
