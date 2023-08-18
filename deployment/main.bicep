@@ -1,4 +1,4 @@
-﻿targetScope = 'resourceGroup'
+targetScope = 'resourceGroup'
 
 @description('Azure location for all resources')
 param location string = 'eastus'
