@@ -8,7 +8,7 @@ param resourceBaseName string = 'virtual-grocer'
 param location string = 'eastus'
 
 var uniqueSuffix = uniqueString(resourceGroup().id)
-var resourceName24 = '${take(resourceBaseName, 11)}-${uniqueSuffix}'
+var resourceName24 = '${take(resourceBaseName, 10)}-${uniqueSuffix}'
 
 /*module azureSSO 'azureSSO.bicep' = {
   name: '${deployment().name}-sso'
