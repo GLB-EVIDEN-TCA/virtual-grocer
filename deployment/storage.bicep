@@ -106,7 +106,7 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
         secureValue: primaryStorageAccount.listKeys().keys[0].value
       }
     ]
-    scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; az storage blob upload-batch -s ./virtual-grocer/content/product-images -d products/product-images'
+    scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; az storage blob upload-batch -s ./content/product-images -d products/product-images'
   }
 }
 
