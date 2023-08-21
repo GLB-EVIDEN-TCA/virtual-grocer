@@ -87,7 +87,7 @@ resource productsContainer 'Microsoft.Storage/storageAccounts/blobServices/conta
 }
 
 resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'deployscript-upload-product-index'
+  name: 'deployscript-upload-product-images'
   location: location
   kind: 'AzureCLI'
   properties: {
@@ -103,12 +103,8 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
         name: 'AZURE_STORAGE_KEY'
         secureValue: primaryStorageAccount.listKeys().keys[0].value
       }
-      {
-        name: 'CONTENT'
-        value: loadTextContent('../content/products/products-generic.json')
-      }
     ]
-    scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; git checkout feature/template; cd content/product-images; az storage blob upload-batch --account-name genaipocstorage -s . -d ecommerce-poc/product-images'
+    scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; git checkout feature/template; cd content/product-images; az storage blob upload-batch -s . -d products/product-images'
   }
 }
 
