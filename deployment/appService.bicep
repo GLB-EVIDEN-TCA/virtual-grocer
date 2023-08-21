@@ -1,7 +1,11 @@
-@description('Name for the Storage Account')
+@description('Name for the Web App')
+@minLength(2)
+@maxLength(60)
 param webAppName string = 'app-virtual-grocer'
 
-@description('Name for the Storage Account')
+@description('Name for the App Service Plan')
+@minLength(2)
+@maxLength(60)
 param appServicePlanName string = 'plan-virtual-grocer'
 
 @description('Azure Location for the Storage Account')
@@ -201,7 +205,7 @@ resource keyVaultSecretsUserRoleDefinition 'Microsoft.Authorization/roleDefiniti
   name: '4633458b-17de-408a-b874-0445c86b69e6'
 }
 
-resource indexContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
   name: guid(resourceGroup().id)
   properties: {

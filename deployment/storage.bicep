@@ -1,11 +1,13 @@
 ﻿@description('Name for the Storage Account')
-param primaryStorageAccountName string
+@minLength(3)
+@maxLength(24)
+param storageAccountName string
 
 @description('Azure Location for the Storage Account')
 param location string = resourceGroup().location
 
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: primaryStorageAccountName
+  name: storageAccountName
   location: location
   sku: {
     name: 'Standard_LRS'
@@ -109,4 +111,4 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   }
 }
 
-output productContainerPath string = 'https://${primaryStorageAccountName}.blob.${environment().suffixes.storage}/products/images/'
+output productContainerPath string = 'https://${storageAccountName}.blob.${environment().suffixes.storage}/products/images/'
