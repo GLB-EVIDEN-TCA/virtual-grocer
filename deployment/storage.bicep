@@ -1,8 +1,11 @@
 ﻿@description('Name for the Storage Account')
-param primaryStorageAccountName string
+param primaryStorageAccountName string = 'genaipocstorage'
 
 @description('Azure Location for the Storage Account')
 param location string = resourceGroup().location
+
+@description('URL for the Github Repository')
+param repoUrl string = 'https://github.com/GLB-EVIDEN-TCA/virtual-grocer.git'
 
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: primaryStorageAccountName
@@ -105,7 +108,7 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
         value: loadTextContent('../content/products/products-generic.json')
       }
     ]
-    scriptContent: 'echo "$CONTENT" > products-generic.json && az storage blob upload -f products-generic.json -c products -n "index\\products-generic.json"'
+    scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; git checkout feature/template; cd content/product-images; az storage blob upload-batch --account-name genaipocstorage -s . -d ecommerce-poc/product-images'
   }
 }
 
