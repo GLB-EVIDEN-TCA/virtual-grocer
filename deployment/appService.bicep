@@ -80,7 +80,6 @@ resource webApp 'Microsoft.Web/sites@2022-09-01' = {
     clientCertEnabled: false
     clientCertMode: 'Required'
     hostNamesDisabled: false
-    //customDomainVerificationId: 'DF094F6719CA5D25BB1B0F8000E3C46544AF3DB15C5D3B1EE2FEB2CC74DF563C'
     containerSize: 0
     dailyMemoryTimeQuota: 0
     httpsOnly: true
@@ -90,22 +89,6 @@ resource webApp 'Microsoft.Web/sites@2022-09-01' = {
     keyVaultReferenceIdentity: 'SystemAssigned'
   }
 }
-
-/*resource webAppPublishing 'Microsoft.Web/sites/basicPublishingCredentialsPolicies@2022-09-01' = {
-  parent: webApp
-  name: 'ftp'
-  properties: {
-    allow: true
-  }
-}
-
-resource webAppScm 'Microsoft.Web/sites/basicPublishingCredentialsPolicies@2022-09-01' = {
-  parent: webApp
-  name: 'scm'
-  properties: {
-    allow: true
-  }
-}*/
 
 resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
   parent: webApp
@@ -154,7 +137,6 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
     vnetPrivatePortsCount: 0
     publicNetworkAccess: 'Enabled'
     localMySqlEnabled: false
-    //managedServiceIdentityId: 2640
     ipSecurityRestrictions: [
       {
         ipAddress: 'Any'
@@ -186,14 +168,22 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
   }
 }
 
-/*resource webAppHostBinding 'Microsoft.Web/sites/hostNameBindings@2022-09-01' = {
+resource webAppSettings 'Microsoft.Web/sites/config@2022-03-01' = {
   parent: webApp
-  name: '${webAppName}.azurewebsites.net'
+  name: 'appsettings'
   properties: {
-    siteName: 'virtual-grocer-app'
-    hostNameType: 'Verified'
+    AzureAd__Authority: '${environment().authentication.loginEndpoint}61c2b580-8619-4baf-8040-bac4442e29a6'
+    AzureAd__ClientId: 'd1fb04f5-35a5-4579-832a-3a8884aedb8c'
+    Azure__OpenAI__Endpoint: 'https://grocer-gpt-shqvwescmaqyy.openai.azure.com/'
+    Azure__OpenAI__Model: 'virtual-grocer-chat'
+    Azure__CognitiveSearch__Endpoint: 'https://product-search-shqvwescmaqyy.search.windows.net'
+    Azure__Storage__ProductImagePath: 'https://genaipocstorage.blob.core.windows.net/ecommerce-poc/product-images/generic/'
+    Azure__KeyVault__Uri: keyVault.properties.vaultUri
   }
-}*/
+  dependsOn: [
+    keyVault
+  ]
+}
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
