@@ -56,4 +56,4 @@ resource openAIkey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 
-output openAIendpoint string = 'https://${openAIserviceName}.openai.azure.com'
+output openAIendpoint string = openAIaccount.properties.endpoint

@@ -108,6 +108,9 @@ module appServiceModule 'appService.bicep' = {
     webAppLocation: location
     appServiceSku: appServiceSku
     keyVaultName: keyVaultName
+    storageAccountName: storageAccountName
+    searchServiceName: searchServiceName
+    openAIserviceName: openAIserviceName
   }
   dependsOn: [
     configurationModule

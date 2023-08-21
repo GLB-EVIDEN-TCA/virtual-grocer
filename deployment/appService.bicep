@@ -17,6 +17,15 @@ param appServiceSku string = 'B1'
 @description('Specifies the name of the key vault.')
 param keyVaultName string
 
+@description('Name for the Storage Account')
+param storageAccountName string = 'grocerecomm${uniqueString(resourceGroup().id)}'
+
+@description('Name for the Product Search Service')
+param searchServiceName string = 'product-search-${uniqueString(resourceGroup().id)}'
+
+@description('Name for the OpenAI Chat Service')
+param openAIserviceName string = 'grocer-gpt-${uniqueString(resourceGroup().id)}'
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: appServicePlanName
   location: webAppLocation
@@ -174,15 +183,20 @@ resource webAppSettings 'Microsoft.Web/sites/config@2022-03-01' = {
   properties: {
     AzureAd__Authority: '${environment().authentication.loginEndpoint}61c2b580-8619-4baf-8040-bac4442e29a6'
     AzureAd__ClientId: 'd1fb04f5-35a5-4579-832a-3a8884aedb8c'
-    Azure__OpenAI__Endpoint: 'https://grocer-gpt-shqvwescmaqyy.openai.azure.com/'
+    Azure__OpenAI__Endpoint: openAIaccount.properties.endpoint
     Azure__OpenAI__Model: 'virtual-grocer-chat'
-    Azure__CognitiveSearch__Endpoint: 'https://product-search-shqvwescmaqyy.search.windows.net'
-    Azure__Storage__ProductImagePath: 'https://genaipocstorage.blob.${environment().suffixes.storage}/ecommerce-poc/product-images/generic/'
+    Azure__CognitiveSearch__Endpoint: 'https://${searchServiceName}.search.windows.net'
+    Azure__Storage__ProductImagePath: 'https://${storageAccountName}.blob.${environment().suffixes.storage}/products/product-images/generic/'
     Azure__KeyVault__Uri: keyVault.properties.vaultUri
   }
   dependsOn: [
+    openAIaccount
     keyVault
   ]
+}
+
+resource openAIaccount 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAIserviceName
 }
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
