@@ -128,7 +128,6 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
     use32BitWorkerProcess: true
     webSocketsEnabled: false
     alwaysOn: false
-    //appCommandLine: 'dotnet InventoryPoc.Web.Server.dll'
     managedPipelineMode: 'Integrated'
     virtualApplications: [
       {
