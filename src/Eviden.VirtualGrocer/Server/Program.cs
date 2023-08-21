@@ -12,14 +12,26 @@ var builder = WebApplication.CreateBuilder(args);
 // Initialize the configuration
 var config = builder.Configuration;
 
+var logger = LoggerFactory.Create(config =>
+{
+    config.AddConsole();
+}).CreateLogger("Program");
+
 // Register Azure KeyVault
 var keyVaultUri = config["Azure:KeyVault:Uri"];
+logger.LogInformation(keyVaultUri);
+
 config.AddAzureKeyVault(
     new Uri(keyVaultUri!),
     new DefaultAzureCredential()
 );
 
 // Register Azure Cognitive and Search services
+logger.LogInformation(config["Azure:OpenAI:Endpoint"]);
+logger.LogInformation(config["Azure:OpenAI:Model"]);
+logger.LogInformation(config["Azure:CognitiveSearch:Endpoint"]);
+//logger.LogInformation(config["azure-openai-key"]);
+//logger.LogInformation(config["cognitive-search-key"]);
 var azureAiKey = config["azure-openai-key"];
 var azureAiEndpoint = config["Azure:OpenAI:Endpoint"];
 var azureAiModel = config["Azure:OpenAI:Model"];
