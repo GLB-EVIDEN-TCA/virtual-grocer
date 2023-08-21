@@ -6,6 +6,9 @@ param storageAccountName string
 @description('Azure Location for the Storage Account')
 param location string = resourceGroup().location
 
+@description('URL for the Github Repository')
+param repoUrl string = 'https://github.com/GLB-EVIDEN-TCA/virtual-grocer.git'
+
 resource primaryStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
   location: location
@@ -86,7 +89,7 @@ resource productsContainer 'Microsoft.Storage/storageAccounts/blobServices/conta
 }
 
 resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'deployscript-upload-product-index'
+  name: 'deployscript-upload-product-images'
   location: location
   kind: 'AzureCLI'
   properties: {
@@ -102,12 +105,8 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
         name: 'AZURE_STORAGE_KEY'
         secureValue: primaryStorageAccount.listKeys().keys[0].value
       }
-      {
-        name: 'CONTENT'
-        value: loadTextContent('../content/products/products-generic.json')
-      }
     ]
-    scriptContent: 'echo "$CONTENT" > products-generic.json && az storage blob upload -f products-generic.json -c products -n "index\\products-generic.json"'
+    scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; git checkout feature/template; az storage blob upload-batch -s virtual-grocer/content/product-images/. -d products/product-images'
   }
 }
 
