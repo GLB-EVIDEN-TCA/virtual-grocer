@@ -177,7 +177,7 @@ resource webAppSettings 'Microsoft.Web/sites/config@2022-03-01' = {
     Azure__OpenAI__Endpoint: 'https://grocer-gpt-shqvwescmaqyy.openai.azure.com/'
     Azure__OpenAI__Model: 'virtual-grocer-chat'
     Azure__CognitiveSearch__Endpoint: 'https://product-search-shqvwescmaqyy.search.windows.net'
-    Azure__Storage__ProductImagePath: 'https://genaipocstorage.blob.core.windows.net/ecommerce-poc/product-images/generic/'
+    Azure__Storage__ProductImagePath: 'https://genaipocstorage.blob.${environment().suffixes.storage}/ecommerce-poc/product-images/generic/'
     Azure__KeyVault__Uri: keyVault.properties.vaultUri
   }
   dependsOn: [
@@ -209,4 +209,4 @@ resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04
   ]
 }
 
-output webAppUrl string = '${webAppName}.azurewebsites.net'
+output webAppUrl string = webApp.properties.defaultHostName
