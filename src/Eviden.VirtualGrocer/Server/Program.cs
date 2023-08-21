@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Initialize the configuration
 var config = builder.Configuration;
-config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)!);
 
 // Register Azure KeyVault
 var keyVaultUri = config["Azure:KeyVault:Uri"];
