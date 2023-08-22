@@ -61,49 +61,7 @@ resource searchServiceKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
     contentType: 'Cognitive Search Key'
     value: searchService.listQueryKeys().value[0].key
   }
-}
-
-/*
-resource deploymentIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
-  name: '${searchService.name}-deployment-identity'
-  location: location
-}
-
-@description('This is the built-in Search Service Contributor role. See https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#search-service-contributor')
-resource searchServiceContributorRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: subscription()
-  name: '7ca78c08-252a-4471-8644-bb5ff32d4ba0'
-}
-
-resource indexContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: searchService
-  name: guid(searchService.id, deploymentIdentity.id, searchServiceContributorRoleDefinition.id)
-  properties: {
-    roleDefinitionId: searchServiceContributorRoleDefinition.id
-    principalId: deploymentIdentity.properties.principalId
-    principalType: 'ServicePrincipal'
-  }
-}
-
-resource setupSearchService 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: '${searchServiceName}-setup'
-  location: location
-  identity: {
-    type: 'UserAssigned'
-    userAssignedIdentities: {
-      '${deploymentIdentity.id}': {}
-    }
-  }
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.3'
-    timeout: 'PT30M'
-    arguments: '-searchServiceName \\"${searchServiceName}\\"'
-    scriptContent: loadTextContent('SetupSearchService.ps1')
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}*/
+} 
 
 // Deployment script for creating an index and uploading data
 resource setupIndexAndUploadData 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
@@ -118,14 +76,19 @@ resource setupIndexAndUploadData 'Microsoft.Resources/deploymentScripts@2020-10-
         name: 'CONTENT'
         value: loadTextContent('../content/products/products-generic.json')
       }
+      {
+        name: 'SEARCH_SERVICE_ADMIN_KEY'
+        secureValue: searchService.listAdminKeys().primaryKey
+      }
     ]
-    arguments: '-searchServiceName \\"${searchServiceName}\\" -searchServiceKey \\"${searchService.listAdminKeys().primaryKey}\\" -indexName \\"${searchServiceIndexName}\\"'
+    arguments: '-searchServiceName \\"${searchServiceName}\\" -indexName \\"${searchServiceIndexName}\\"'
     scriptContent: '''
       param(
         [string]$searchServiceName,
-        [string]$searchServiceKey,
         [string]$indexName
       )
+
+      $searchServiceKey = $env:SEARCH_SERVICE_ADMIN_KEY
       
       # Define the index schema
       $indexDefinition = @{
