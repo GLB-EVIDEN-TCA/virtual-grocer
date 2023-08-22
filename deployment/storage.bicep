@@ -108,6 +108,9 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     scriptContent: 'git clone ${repoUrl}; cd virtual-grocer; az storage blob upload-batch -s ./content/product-images -d products/product-images'
   }
+  dependsOn: [
+    productsContainer
+  ]
 }
 
 output productContainerPath string = 'https://${storageAccountName}.blob.${environment().suffixes.storage}/products/images/'

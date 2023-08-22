@@ -114,6 +114,7 @@ module appServiceModule 'appService.bicep' = {
   }
   dependsOn: [
     configurationModule
+    openAImodule
   ]
 }
 
