@@ -1,7 +1,11 @@
-@description('Name for the Storage Account')
+@description('Name for the Web App')
+@minLength(2)
+@maxLength(60)
 param webAppName string = 'app-virtual-grocer'
 
-@description('Name for the Storage Account')
+@description('Name for the App Service Plan')
+@minLength(2)
+@maxLength(60)
 param appServicePlanName string = 'plan-virtual-grocer'
 
 @description('Azure Location for the Storage Account')
@@ -9,6 +13,18 @@ param webAppLocation string = resourceGroup().location
 
 @description('The SKU of App Service Plan.')
 param appServiceSku string = 'B1'
+
+@description('Specifies the name of the key vault.')
+param keyVaultName string
+
+@description('Name for the Storage Account')
+param storageAccountName string = 'grocerecomm${uniqueString(resourceGroup().id)}'
+
+@description('Name for the Product Search Service')
+param searchServiceName string = 'product-search-${uniqueString(resourceGroup().id)}'
+
+@description('Name for the OpenAI Chat Service')
+param openAIserviceName string = 'grocer-gpt-${uniqueString(resourceGroup().id)}'
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: appServicePlanName
@@ -73,7 +89,6 @@ resource webApp 'Microsoft.Web/sites@2022-09-01' = {
     clientCertEnabled: false
     clientCertMode: 'Required'
     hostNamesDisabled: false
-    //customDomainVerificationId: 'DF094F6719CA5D25BB1B0F8000E3C46544AF3DB15C5D3B1EE2FEB2CC74DF563C'
     containerSize: 0
     dailyMemoryTimeQuota: 0
     httpsOnly: true
@@ -83,22 +98,6 @@ resource webApp 'Microsoft.Web/sites@2022-09-01' = {
     keyVaultReferenceIdentity: 'SystemAssigned'
   }
 }
-
-/*resource webAppPublishing 'Microsoft.Web/sites/basicPublishingCredentialsPolicies@2022-09-01' = {
-  parent: webApp
-  name: 'ftp'
-  properties: {
-    allow: true
-  }
-}
-
-resource webAppScm 'Microsoft.Web/sites/basicPublishingCredentialsPolicies@2022-09-01' = {
-  parent: webApp
-  name: 'scm'
-  properties: {
-    allow: true
-  }
-}*/
 
 resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
   parent: webApp
@@ -147,7 +146,6 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
     vnetPrivatePortsCount: 0
     publicNetworkAccess: 'Enabled'
     localMySqlEnabled: false
-    //managedServiceIdentityId: 2640
     ipSecurityRestrictions: [
       {
         ipAddress: 'Any'
@@ -179,13 +177,50 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
   }
 }
 
-/*resource webAppHostBinding 'Microsoft.Web/sites/hostNameBindings@2022-09-01' = {
+resource webAppSettings 'Microsoft.Web/sites/config@2022-03-01' = {
   parent: webApp
-  name: '${webAppName}.azurewebsites.net'
+  name: 'appsettings'
   properties: {
-    siteName: 'virtual-grocer-app'
-    hostNameType: 'Verified'
+    AzureAd__Authority: '${environment().authentication.loginEndpoint}61c2b580-8619-4baf-8040-bac4442e29a6'
+    AzureAd__ClientId: 'd1fb04f5-35a5-4579-832a-3a8884aedb8c'
+    Azure__OpenAI__Endpoint: openAIaccount.properties.endpoint
+    Azure__OpenAI__Model: 'virtual-grocer-chat'
+    Azure__CognitiveSearch__Endpoint: 'https://${searchServiceName}.search.windows.net'
+    Azure__Storage__ProductImagePath: 'https://${storageAccountName}.blob.${environment().suffixes.storage}/products/product-images/generic/'
+    Azure__KeyVault__Uri: keyVault.properties.vaultUri
   }
-}*/
+  dependsOn: [
+    openAIaccount
+    keyVault
+  ]
+}
 
-output webAppUrl string = '${webAppName}.azurewebsites.net'
+resource openAIaccount 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAIserviceName
+}
+
+resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: keyVaultName
+}
+
+@description('This is the built-in Key Vault Secrets User role. See https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#key-vault-secrets-user')
+resource keyVaultSecretsUserRoleDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+  scope: keyVault
+  name: '4633458b-17de-408a-b874-0445c86b69e6'
+}
+
+resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: keyVault
+  name: guid(resourceGroup().id)
+  properties: {
+    roleDefinitionId: keyVaultSecretsUserRoleDefinition.id
+    principalId: webApp.identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+  dependsOn: [
+    keyVault
+    keyVaultSecretsUserRoleDefinition
+  ]
+}
+
+output webAppUrl string = webApp.properties.defaultHostName

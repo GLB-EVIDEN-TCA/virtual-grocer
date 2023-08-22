@@ -2,11 +2,14 @@
 param location string = resourceGroup().location
 
 @description('Name for the Product Search Service')
-param searchServiceName string
+@minLength(2)
+@maxLength(60)
+param searchServiceName string = 'product-search'
 
 @description('Name for the Product Search Service Index to store the Inventory Data')
 param searchServiceIndexName string = 'product-inventory'
 
+@description('The pricing tier of the search service you want to create (for example, basic or standard).')
 @allowed([
   'free'
   'basic'
@@ -16,7 +19,6 @@ param searchServiceIndexName string = 'product-inventory'
   'storage_optimized_l1'
   'storage_optimized_l2'
 ])
-@description('The pricing tier of the search service you want to create (for example, basic or standard).')
 param searchServiceSku string = 'basic'
 
 @description('Specifies the name of the key vault.')

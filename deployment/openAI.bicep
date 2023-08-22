@@ -1,7 +1,9 @@
 ﻿@description('Azure Location for the Storage Account')
 param location string = resourceGroup().location
 
-@description('Name for the Product Search Service')
+@description('Name for the OpenAI Chat Service')
+@minLength(2)
+@maxLength(64)
 param openAIserviceName string = 'grocer-gpt'
 
 @description('Specifies the name of the key vault.')
@@ -54,4 +56,4 @@ resource openAIkey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 
-output openAIendpoint string = 'https://${openAIserviceName}.openai.azure.com'
+output openAIendpoint string = openAIaccount.properties.endpoint
