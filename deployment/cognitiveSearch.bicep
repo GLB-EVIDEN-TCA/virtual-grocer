@@ -4,7 +4,10 @@ param location string = resourceGroup().location
 @description('Name for the Product Search Service')
 @minLength(2)
 @maxLength(60)
-param searchServiceName string = 'product-search'
+param searchServiceName string
+
+@description('Name for the Product Search Service Index to store the Inventory Data')
+param searchServiceIndexName string = 'product-inventory'
 
 @description('The pricing tier of the search service you want to create (for example, basic or standard).')
 @allowed([
@@ -102,4 +105,102 @@ resource setupSearchService 'Microsoft.Resources/deploymentScripts@2020-10-01' =
   }
 }*/
 
-output searchEndpoint string = 'https://${searchServiceName}.search.windows.net'
+// Deployment script for creating an index and uploading data
+resource setupIndexAndUploadData 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
+  name: '${searchServiceName}-setup-index'
+  location: location
+  kind: 'AzurePowerShell'
+  properties: {
+    azPowerShellVersion: '8.3'
+    timeout: 'PT30M'
+    environmentVariables: [
+      {
+        name: 'CONTENT'
+        value: loadTextContent('../content/products/products-generic.json')
+      }
+    ]
+    arguments: '-searchServiceName \\"${searchServiceName}\\" -searchServiceKey \\"${searchService.listAdminKeys().primaryKey}\\" -indexName \\"${searchServiceIndexName}\\"'
+    scriptContent: '''
+      param(
+        [string]$searchServiceName,
+        [string]$searchServiceKey,
+        [string]$indexName
+      )
+      
+      # Define the index schema
+      $indexDefinition = @{
+        "name" = $indexName;
+        "fields" = @(
+            @{
+                "name" = "id";
+                "type" = "Edm.String";
+                "key" = $true;
+                "filterable" = $false;
+                "sortable" = $false;
+                "retrievable" = $true;
+                "facetable" = $false;
+            },
+            @{
+                "name" = "name";
+                "type" = "Edm.String";
+                "searchable" = $true;
+                "filterable" = $true;
+                "sortable" = $true;
+                "retrievable" = $true;
+                "facetable" = $false;
+            },
+            @{
+                "name" = "aliases";
+                "type" = "Collection(Edm.String)";
+                "searchable" = $true;
+                "filterable" = $false;
+                "sortable" = $false;
+                "retrievable" = $false;
+                "facetable" = $false;
+            },
+            @{
+                "name" = "size";
+                "type" = "Edm.String";
+                "searchable" = $true;
+                "filterable" = $false;
+                "sortable" = $true;
+                "retrievable" = $true;
+                "facetable" = $false;
+            },
+            @{
+                "name" = "image_name";
+                "type" = "Edm.String";
+                "searchable" = $false;
+                "filterable" = $false;
+                "sortable" = $false;
+                "retrievable" = $true;
+                "facetable" = $false;
+            },
+            @{
+                "name" = "cost";
+                "type" = "Edm.Double";
+                "searchable" = $false;
+                "filterable" = $false;
+                "sortable" = $true;
+                "retrievable" = $true;
+                "facetable" = $false;
+            }
+        )
+      }
+      # Create the index in Azure Search Service
+      Invoke-RestMethod -Method Post -Uri "https://$searchServiceName.search.windows.net/indexes?api-version=2020-06-30" -Body (ConvertTo-Json -InputObject $indexDefinition) -Headers @{
+          "api-key" = $searchServiceKey;
+          "Content-Type" = "application/json";
+      }
+
+      $jsonContent = $env:CONTENT
+
+      Invoke-RestMethod -Method Post -Uri "https://$searchServiceName.search.windows.net/indexes/$indexName/docs/index?api-version=2020-06-30" -Body $jsonContent -Headers @{
+          "api-key" = $searchServiceKey;
+          "Content-Type" = "application/json";
+      }
+    '''
+    cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
+  }
+}
