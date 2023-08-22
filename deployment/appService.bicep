@@ -119,7 +119,7 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
     linuxFxVersion: 'DOTNETCORE|7.0'
     requestTracingEnabled: false
     remoteDebuggingEnabled: false
-    httpLoggingEnabled: false
+    httpLoggingEnabled: true
     acrUseManagedIdentityCreds: false
     logsDirectorySizeLimit: 35
     detailedErrorLoggingEnabled: false
