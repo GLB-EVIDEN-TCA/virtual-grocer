@@ -4,7 +4,7 @@ param location string = resourceGroup().location
 @description('Name for the Product Search Service')
 @minLength(2)
 @maxLength(60)
-param searchServiceName string = 'product-search'
+param searchServiceName string
 
 @description('Name for the Product Search Service Index to store the Inventory Data')
 param searchServiceIndexName string = 'product-inventory'
