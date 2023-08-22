@@ -22,6 +22,9 @@ param storageAccountName string = 'grocerecomm${uniqueString(resourceGroup().id)
 @maxLength(60)
 param searchServiceName string = 'product-search-${uniqueString(resourceGroup().id)}'
 
+@description('Name for the Product Search Service Index to store the Inventory Data')
+param searchServiceIndexName string = 'product-inventory'
+
 @description('The pricing tier of the search service you want to create (for example, basic or standard).')
 @allowed([
   'free'
@@ -80,6 +83,7 @@ module cognitiveSearchModule 'cognitiveSearch.bicep' = {
   params: {
     location: location
     searchServiceName: searchServiceName
+    searchServiceIndexName: searchServiceIndexName
     searchServiceSku: searchServiceSku
     keyVaultName: keyVaultName
   }
@@ -110,6 +114,7 @@ module appServiceModule 'appService.bicep' = {
     keyVaultName: keyVaultName
     storageAccountName: storageAccountName
     searchServiceName: searchServiceName
+    searchServiceIndexName: searchServiceIndexName
     openAIserviceName: openAIserviceName
   }
   dependsOn: [
