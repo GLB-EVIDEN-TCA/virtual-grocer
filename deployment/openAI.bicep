@@ -32,13 +32,13 @@ resource openAIdeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
   name: 'virtual-grocer-chat'
   sku: {
     name: 'Standard'
-    capacity: 30
+    capacity: 10
   }
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'text-davinci-003'
-      version: '1'
+      name: 'gpt-35-turbo'
+      version: '0613'
     }
   }
 }
