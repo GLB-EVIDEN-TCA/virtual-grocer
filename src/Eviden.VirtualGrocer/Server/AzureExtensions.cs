@@ -35,7 +35,7 @@ namespace Eviden.VirtualGrocer.Web.Server
             services.AddScoped(
                 sp =>
                 {
-                    IKernel kernel = Kernel.Builder.WithAzureTextCompletionService(model, endpoint, key).Build();
+                    IKernel kernel = Kernel.Builder.WithAzureChatCompletionService(model, endpoint, key).Build();
                     sp.GetRequiredService<RegisterSkillsWithKernel>()(sp, kernel);
 
                     return kernel;
