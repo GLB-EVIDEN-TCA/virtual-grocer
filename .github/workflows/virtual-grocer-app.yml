@@ -1,5 +1,7 @@
 name: Build and Deploy Virtual Grocer application to Azure
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
 env:
   AZURE_WEBAPP_PACKAGE_PATH: ./published
   AZURE_TEMPLATE_PATH: ./template
