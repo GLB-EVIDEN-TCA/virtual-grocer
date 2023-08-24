@@ -26,7 +26,6 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.AZURE_RG }}
           template: ./deployment/main.bicep
-          #parameters: "storagePrefix=mystore storageSKU=Standard_LRS"
           failOnStdErr: true
           deploymentMode: "Validate"
           deploymentName: "virtual-grocer-deployment"
@@ -54,6 +53,13 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget
+          restore-keys: |
+            ${{ runner.os }}-nuget
       - name: Restore
         run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
       - name: Build
@@ -88,7 +94,6 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: ${{ secrets.AZURE_RG }}
           template: ./deployment/main.bicep
-          #parameters: "storagePrefix=mystore storageSKU=Standard_LRS"
           failOnStdErr: true
           deploymentMode: "Incremental"
           deploymentName: "virtual-grocer-deployment"

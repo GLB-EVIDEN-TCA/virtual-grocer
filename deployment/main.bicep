@@ -15,7 +15,7 @@ param keyVaultName string = 'grocer-vlt-${uniqueString(resourceGroup().id)}'
 @description('Name for the Storage Account')
 @minLength(3)
 @maxLength(24)
-param storageAccountName string = 'grocerecomm${uniqueString(resourceGroup().id)}'
+param storageAccountName string = 'grocerstor${uniqueString(resourceGroup().id)}'
 
 @description('Name for the Product Search Service')
 @minLength(2)
