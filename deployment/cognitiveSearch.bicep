@@ -150,10 +150,29 @@ resource setupIndexAndUploadData 'Microsoft.Resources/deploymentScripts@2020-10-
             }
         )
       }
-      # Create the index in Azure Search Service
-      Invoke-RestMethod -Method Post -Uri "https://$searchServiceName.search.windows.net/indexes?api-version=2020-06-30" -Body (ConvertTo-Json -InputObject $indexDefinition) -Headers @{
-          "api-key" = $searchServiceKey;
-          "Content-Type" = "application/json";
+
+      #Check if the $indexName index already exists, if it does not, create it
+      try {
+        # Check if the $indexName index already exists
+        $indexExists = Invoke-RestMethod -Method Get -Uri "https://$searchServiceName.search.windows.net/indexes/$indexName\?api-version=2020-06-30" -Headers @{"api-key" = $searchServiceKey}
+    
+        # If no error, index exists, but this logic won't be used, it's here for clarity
+        Write-Host "Index $indexName already exists"
+      }
+      catch {
+          # If error, check if it's a 404
+          if ($_.Exception.Response.StatusCode -eq 'NotFound') {
+              Write-Host "Index $indexName does not exist, creating it now"
+              
+              Invoke-RestMethod -Method Post -Uri "https://$searchServiceName.search.windows.net/indexes?api-version=2020-06-30" -Body (ConvertTo-Json -InputObject $indexDefinition) -Headers @{
+                "api-key" = $searchServiceKey
+                "Content-Type" = "application/json"
+              }
+          }
+          else {
+              # If error is something other than 404
+              throw $_
+          }
       }
 
       $jsonContent = $env:CONTENT
