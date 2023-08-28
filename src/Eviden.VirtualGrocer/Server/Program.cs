@@ -11,7 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Initialize the configuration
 var config = builder.Configuration;
-config.InitializeCommonConfiguration(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)!);
+
+//Log appSettings
+var logger = LoggerFactory.Create(config =>
+{
+    config.AddConsole();
+}).CreateLogger("Program");
+logger.LogInformation(config["Azure:KeyVault:Uri"]);
+logger.LogInformation(config["Azure:OpenAI:Endpoint"]);
+logger.LogInformation(config["Azure:OpenAI:Model"]);
+logger.LogInformation(config["Azure:CognitiveSearch:Endpoint"]);
 
 // Register Azure KeyVault
 var keyVaultUri = config["Azure:KeyVault:Uri"];

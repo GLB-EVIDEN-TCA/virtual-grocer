@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{64EE2856-049C-4CAB-B732-A8D0E77B96AF}"
-	ProjectSection(SolutionItems) = preProject
-		config\common.appsettings.Development.json = config\common.appsettings.Development.json
-		config\common.appsettings.json = config\common.appsettings.json
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eviden.VirtualGrocer.Shared", "Eviden.VirtualGrocer\Shared\Eviden.VirtualGrocer.Shared.csproj", "{7628629B-094E-4BB7-9E6C-852F307D10BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eviden.VirtualGrocer.Web.Client", "Eviden.VirtualGrocer\Client\Eviden.VirtualGrocer.Web.Client.csproj", "{8EB45DF8-2BB7-4C5C-A885-F16D0F508CE8}"
