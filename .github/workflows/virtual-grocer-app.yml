@@ -39,7 +39,7 @@ jobs:
           inlineScript: |
             #!/bin/bash
             mkdir -p ${{ env.AZURE_TEMPLATE_PATH }}
-            az bicep build --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/azureDeployment.json"
+            az bicep build --file ./deployment/main.bicep --outfile "${{ env.AZURE_TEMPLATE_PATH }}/azuredeploy.json"
       - name: Publish Artifacts
         uses: actions/upload-artifact@v3
         with:

@@ -1,7 +1,7 @@
 ﻿targetScope = 'resourceGroup'
 
 @description('Azure location for all resources')
-param location string = 'eastus'
+param location string = '[resourceGroup().location]'
 
 @description('Base name for the application and resources')
 @minLength(3)
