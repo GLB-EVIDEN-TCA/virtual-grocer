@@ -20,8 +20,6 @@ resource openAIaccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
     customSubDomainName: openAIserviceName
     networkAcls: {
       defaultAction: 'Allow'
-      virtualNetworkRules: []
-      ipRules: []
     }
     publicNetworkAccess: 'Enabled'
   }
