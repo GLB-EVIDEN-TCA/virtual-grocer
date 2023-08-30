@@ -1,4 +1,5 @@
 ﻿﻿For each item in the input, classify it as a shopping-list-item or a recipe. Examples:
+{input} | {classification}
 I want a chocolate cake | shopping-list-item
 I want oil | shopping-list-item
 I'd like a chocolate cake | shopping-list-item
@@ -10,8 +11,6 @@ I need chocolate cake | shopping-list-item
 I want to buy salsa | shopping-list-item
 I want pre made chocolate cake | shopping-list-item
 I want cookies from the bakery | shopping-list-item
-
-If nothing at all in the input can be classified as a shopping-list-item, recipe, or something you would buy at a grocery store, say something humorous in response to the input, then say you're sorry this is a grocery store.  But, if at least one thing in the input can be classified, then it is OK.
 
 For a recipe, find the ingredients for the a popular recipe for that item and show the result as a JSON object with the following properties:
 - RecipeName
@@ -25,11 +24,12 @@ For a recipe, find the ingredients for the a popular recipe for that item and sh
 ALWAYS return the results in a VALID JSON object with the following properties:
 - Recipes (an array of recipe objects)
 - ShoppingListItems (an array of strings)
-- OtherContent (an array of strings)
-
-Any other commentary should be placed in the OtherContent array of the JSON object.
+- Message (string)
 
 ONLY RETURN THE JSON OBJECT. 
+
+If there is at least one recipe or shoppinglistitem, the Message property should contain a message that says something fun and uplifting related to the input.  
+Otherwise reply with something funny related to the below input: 
 
 ++++
 

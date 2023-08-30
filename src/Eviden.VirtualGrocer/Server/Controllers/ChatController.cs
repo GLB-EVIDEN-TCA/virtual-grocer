@@ -44,21 +44,21 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
             _logger.LogDebug($"Calling {nameof(ChatController)}.{nameof(Post)} with {nameof(prompt)} = \"{prompt.Prompt}\"");
 
             // save user prompt to chat history (prompt)
-            var history = await _chatRepo.GetAsync(prompt.ChatId);
+            //var history = await _chatRepo.GetAsync(prompt.ChatId);
 
             SKContext? skContext = null;
             try
             {
 				ContextVariables variables = new ContextVariables(prompt.Prompt!);
                 variables.Set("chatId", prompt.ChatId);
-                variables.Set("chatHistory", ExtractUserChatHistory(history, prompt.Prompt!));
-                variables.Set("originalPrompt", prompt.Prompt!);
+                //variables.Set("chatHistory", ExtractUserChatHistory(history, prompt.Prompt!));
+                //variables.Set("originalPrompt", prompt.Prompt!);
 
                 //Call Semantic Kernel
                 skContext = await _semanticKernel.RunAsync(
                     variables,
-                    _semanticKernel.Skills.GetFunction("Inventory", "ItemIntent"),
-                    _semanticKernel.Skills.GetFunction("Inventory", SkillNames.RenderItemIntentResponse),
+                    //_semanticKernel.Skills.GetFunction("Inventory", "ItemIntent"),
+                    //_semanticKernel.Skills.GetFunction("Inventory", SkillNames.RenderItemIntentResponse),
                     _semanticKernel.Skills.GetFunction("Inventory", "PersonalShopper"),
                     _semanticKernel.Skills.GetFunction("Inventory", SkillNames.RememberShoppingListResult),
                     _semanticKernel.Skills.GetFunction("Inventory", SkillNames.BuildInventoryQuery),
@@ -80,11 +80,11 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
 					return new ChatMessage(prompt.ChatId) { PreContent = skContext.Result, IsError = true, ErrorMessage = errorMessage };
                 }
 
-                history.Add("User", prompt.Prompt!);
+                //history.Add("User", prompt.Prompt!);
 
                 // save response to chat history (skContext.Result)
-                history.Add("Bot", skContext.Result!);
-                await _chatRepo.StashAsync(history);
+                //history.Add("Bot", skContext.Result!);
+                //await _chatRepo.StashAsync(history);
 
                 return JsonSerializer.Deserialize<ChatMessage>(skContext.Result) ?? new ChatMessage(prompt.ChatId);
             }

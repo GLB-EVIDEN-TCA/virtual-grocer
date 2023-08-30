@@ -32,13 +32,13 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
             var recipes = result.Recipes.Select(x => (Recipe)x).ToArray();
             var chatId = context.Variables["chatId"];
 
-            RenderOutputResult output = (recipes.Any(), products.Any(), result.OtherContent.Any()) switch
+            RenderOutputResult output = (recipes.Any(), products.Any(), !string.IsNullOrEmpty(result.Message)) switch
             {
-                (false, false, true) => new ChatMessage(chatId) { ErrorMessage = result.OtherContent.First(), IsError = true },
-                (false, false, _) => new ChatMessage(chatId) { InventoryContent = "We don't have any of the required ingredients in stock" },
-                (false, true, _) => new ChatMessage(chatId) { InventoryContent = "These are items we have in stock related to your ask.", Products = products },
-                (true, false, _) => new ChatMessage(chatId) { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "We don't have any of the required ingredients in stock" },
-                (true, true, _) => new ChatMessage(chatId) { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "These are items we have in stock related to your ask.", Products = products },
+                (false, false, true) => new ChatMessage(chatId) { ErrorMessage = result.Message, IsError = true },
+                (false, false, _) => new ChatMessage(chatId) { InventoryContent = "We don't have any of the required ingredients in stock", PreContent = result.Message },
+                (false, true, _) => new ChatMessage(chatId) { InventoryContent = "These are items we have in stock related to your ask.", Products = products, PreContent = result.Message },
+                (true, false, _) => new ChatMessage(chatId) { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "We don't have any of the required ingredients in stock", PreContent = result.Message },
+                (true, true, _) => new ChatMessage(chatId) { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "These are items we have in stock related to your ask.", Products = products, PreContent = result.Message },
             };
 
             return output;
