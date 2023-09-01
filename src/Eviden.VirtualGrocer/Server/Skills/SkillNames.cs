@@ -6,6 +6,5 @@
         public const string BuildInventoryQuery = nameof(InventorySearchSkill.BuildInventoryQuery);
         public const string RememberShoppingListResult = nameof(RememberShoppingListSkill.RememberShoppingListResult);
         public const string RenderShoppingListResponse = nameof(RenderOutputSkill.RenderShoppingListResponse);
-        public const string RenderItemIntentResponse = nameof(RenderOutputSkill.RenderItemIntentResponse);
     }
 }

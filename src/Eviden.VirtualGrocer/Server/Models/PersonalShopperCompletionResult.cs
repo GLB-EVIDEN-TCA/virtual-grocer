@@ -3,5 +3,5 @@
     public record PersonalShopperCompletionResult(
         IEnumerable<RecipeCompletionResult> Recipes,
         IEnumerable<string> ShoppingListItems,
-        IEnumerable<string> OtherContent);
+        string Message);
 }

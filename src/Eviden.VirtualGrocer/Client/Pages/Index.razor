@@ -109,7 +109,6 @@
 </div>
 
 @code {
-	private string _chatId = Guid.NewGuid().ToString();
 	private readonly List<ChatMessage?> _messages = new();
 	private CancellationTokenSource? _sendMessageCts;
 	private ElementReference _inputElement;
@@ -125,7 +124,7 @@
 		{
 			await JsRuntime.InvokeVoidAsync("initEnterKeyListener", _inputElement, DotNetObjectReference.Create(this));
 			await AddChatMessage(
-				new ChatMessage(_chatId)
+				new ChatMessage()
 				{ 
 					IsUser = false, 
 					PreContent = "Greetings! I'm your virtual grocer assistant. Ask me for any grocery items or recipes.", 
@@ -164,10 +163,9 @@
 
 	private async Task ClearMessages()
 	{
-		_chatId = Guid.NewGuid().ToString();
 		_messages.Clear();
 		await AddChatMessage(
-			new ChatMessage(_chatId) 
+			new ChatMessage() 
 			{ 
 				IsUser = false, 
 				PreContent = "Alright, let's get back to it! Ask me for any grocery items or recipes.",
@@ -194,11 +192,11 @@
 
 			_input = string.Empty;
 
-			_messages.Add(new ChatMessage(_chatId) { PreContent = copyOfInput, IsUser = true });
+			_messages.Add(new ChatMessage { PreContent = copyOfInput, IsUser = true });
 			await ScrollToBottom();
 
 			// Create a temporary message
-			var tempMessage = new ChatMessage(_chatId) { PreContent = "Working .", IsUser = false, IsLoading = true };
+			var tempMessage = new ChatMessage { PreContent = "Working .", IsUser = false, IsLoading = true };
 			_messages.Add(tempMessage);
 
 			// Start a background task that updates the temporary message every 1/4th of a second
@@ -217,7 +215,7 @@
 			}, token);
 
 			// Send HTTP request
-			var response = await Http.PostAsJsonAsync("/chat", new ChatPrompt(_chatId) { Prompt = copyOfInput }, _sendMessageCts.Token);
+			var response = await Http.PostAsJsonAsync("/chat", new ChatPrompt { Prompt = copyOfInput }, _sendMessageCts.Token);
 
 			// Cancel the background task
 			_sendMessageCts.Cancel();
