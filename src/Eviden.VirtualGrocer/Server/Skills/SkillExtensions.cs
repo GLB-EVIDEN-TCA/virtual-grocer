@@ -4,38 +4,77 @@ using System.Reflection;
 
 namespace Eviden.VirtualGrocer.Web.Server.Skills
 {
+    /// <summary>
+    /// Extension methods for the <see cref="IKernel"/> interface.
+    /// </summary>
     public static class SkillExtensions
     {
+        /// <summary>
+        /// Searches for and adds all embedded skills to the kernel.
+        /// </summary>
+        /// <param name="kernel"></param>
+        /// <returns></returns>
         public static IKernel AddEmbeddedSkills(this IKernel kernel)
         {
+            // Extract all resource names from the current assembly
             string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
 
-            // discover all semantic skill functions, grouping by skill/function; ordering is done to ensure the config.json is processed first.
-            // surprisingly, this is not a personal record for number of LINQ statements.
-            var functions =
-                from resourceName in resourceNames
-                where resourceName.EndsWith("skprompt.txt", StringComparison.OrdinalIgnoreCase) ||
-                    resourceName.EndsWith("config.json", StringComparison.OrdinalIgnoreCase)
-                let skillBitsFull = resourceName.Split('.')
-                where skillBitsFull.Length >= 4
-                let skillBits = skillBitsFull[^4..]
-                let skillName = skillBits[0]
-                let functionName = skillBits[1]
-                let resource = new FunctionResource(skillName, functionName, resourceName)
-                orderby resource.ResourceName
-                group resource by $"{resource.SkillName}.{functionName}" into g
-                where g.Count() == 2
-                select new SkillResources(g.First(), g.Last());
+            // Filter and group relevant resources for skills
+            var skillResources = ExtractSkillResources(resourceNames);
 
-            foreach(var function in functions)
-            {
-                var config = PromptTemplateConfig.FromJson(function.Config.ReadText());
-                var template = new PromptTemplate(function.Prompt.ReadText(), config, kernel.PromptTemplateEngine);
-                var functionConfig = new SemanticFunctionConfig(config, template);
-                kernel.RegisterSemanticFunction(function.SkillName, function.FunctionName, functionConfig);
-            }
+            // Register each skill resource to the kernel
+            RegisterSkills(kernel, skillResources);
 
             return kernel;
+        }
+
+        private static IEnumerable<SkillResources> ExtractSkillResources(string[] resourceNames)
+        {
+            // Identify resources related to skills (based on their extensions)
+            var relevantResources =
+                from resourceName in resourceNames
+                where IsSkillResource(resourceName)
+                select new
+                {
+                    ResourceName = resourceName,
+                    SkillBits = ExtractSkillBits(resourceName)
+                };
+
+            // Group the resources by their skill and function names
+            return from resource in relevantResources
+                   let skillName = resource.SkillBits[0]
+                   let functionName = resource.SkillBits[1]
+                   let functionResource = new FunctionResource(skillName, functionName, resource.ResourceName)
+                   orderby functionResource.ResourceName
+                   group functionResource by $"{skillName}.{functionName}" into groupedResources
+                   where groupedResources.Count() == 2
+                   select new SkillResources(groupedResources.First(), groupedResources.Last());
+        }
+
+        private static bool IsSkillResource(string resourceName)
+        {
+            return resourceName.EndsWith("skprompt.txt", StringComparison.OrdinalIgnoreCase) ||
+                   resourceName.EndsWith("config.json", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string[] ExtractSkillBits(string resourceName)
+        {
+            var skillBitsFull = resourceName.Split('.');
+            if (skillBitsFull.Length < 4)
+                throw new InvalidOperationException("Unexpected resource name format.");
+
+            return skillBitsFull[^4..];
+        }
+
+        private static void RegisterSkills(IKernel kernel, IEnumerable<SkillResources> skillResources)
+        {
+            foreach (var resource in skillResources)
+            {
+                var config = PromptTemplateConfig.FromJson(resource.config.ReadText());
+                var template = new PromptTemplate(resource.prompt.ReadText(), config, kernel.PromptTemplateEngine);
+                var functionConfig = new SemanticFunctionConfig(config, template);
+                kernel.RegisterSemanticFunction(resource.SkillName, resource.FunctionName, functionConfig);
+            }
         }
     }
 
@@ -49,10 +88,10 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
         }
     }
 
-    internal record SkillResources(FunctionResource Config, FunctionResource Prompt)
+    internal record SkillResources(FunctionResource config, FunctionResource prompt)
     {
-        public string SkillName => Config.SkillName;
+        public string SkillName => config.SkillName;
 
-        public string FunctionName => Config.FunctionName;
+        public string FunctionName => config.FunctionName;
     }
 }

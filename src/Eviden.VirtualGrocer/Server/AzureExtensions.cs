@@ -1,9 +1,6 @@
 ﻿using Azure;
-using Azure.AI.OpenAI;
 using Azure.Search.Documents;
 using Eviden.VirtualGrocer.Web.Server.Skills;
-using Eviden.VirtualGrocer.Web.Server.Skills.History;
-using Microsoft.Extensions.Azure;
 using Microsoft.SemanticKernel;
 
 namespace Eviden.VirtualGrocer.Web.Server
@@ -55,7 +52,6 @@ namespace Eviden.VirtualGrocer.Web.Server
             kernel.ImportSkill(new RememberShoppingListSkill(), "Inventory");
             kernel.ImportSkill(
                 new RenderOutputSkill(
-                    sp.GetRequiredService<ResultRepository>(),
                     $"{sp.GetRequiredService<IConfiguration>()["Azure:Storage:ProductImagePath"]}"), "Inventory");
 
             return Task.CompletedTask;

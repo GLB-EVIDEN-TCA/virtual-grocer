@@ -21,8 +21,6 @@ namespace Eviden.VirtualGrocer.Web.Server.Extensions
 
             return config
                 .SetBasePath(path)
-                .AddJsonFile("common.appsettings.json", false, true)
-                .AddJsonFile($"common.appsettings.{environment}.json", true, true)
                 .AddUserSecrets(Assembly.GetExecutingAssembly(), true); ;
         }
     }
