@@ -27,10 +27,10 @@ namespace Eviden.VirtualGrocer.Web.Server.Skills
             var products = BuildProducts(context.Variables["products"]).ToArray();
             var recipes = result.Recipes.Select(x => (Recipe)x).ToArray();
 
-            RenderOutputResult output = (recipes.Any(), products.Any(), !string.IsNullOrEmpty(result.Message)) switch
+            RenderOutputResult output = (recipes.Any(), products.Any(), result.ShoppingListItems.Any()) switch
             {
-                (false, false, true) => new ChatMessage { ErrorMessage = result.Message, IsError = true },
-                (false, false, _) => new ChatMessage { InventoryContent = "We don't have any of the required ingredients in stock", PreContent = result.Message },
+                (false, false, false) => new ChatMessage { InventoryContent = "We don't have any of the required ingredients in stock", IsError = true, ErrorMessage = result.Message },
+                (false, false, true) => new ChatMessage { InventoryContent = "We don't have any of the required ingredients in stock", PreContent = result.Message },
                 (false, true, _) => new ChatMessage { InventoryContent = "These are items we have in stock related to your ask.", Products = products, PreContent = result.Message },
                 (true, false, _) => new ChatMessage { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "We don't have any of the required ingredients in stock", PreContent = result.Message },
                 (true, true, _) => new ChatMessage { RecipeContent = "Here are some recipe details", Recipes = recipes, InventoryContent = "These are items we have in stock related to your ask.", Products = products, PreContent = result.Message },
