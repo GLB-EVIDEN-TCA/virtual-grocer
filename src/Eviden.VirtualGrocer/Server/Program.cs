@@ -1,9 +1,7 @@
 using Eviden.VirtualGrocer.Web.Server;
-using Eviden.VirtualGrocer.Web.Server.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Eviden.VirtualGrocer.Web.Server.Skills.History;
-using System.Reflection;
 using Azure.Identity;
 
 

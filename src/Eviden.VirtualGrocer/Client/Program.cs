@@ -15,10 +15,6 @@ builder.Services.AddHttpClient("Eviden.VirtualGrocer.Web.Client.ServerAPI", clie
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("Eviden.VirtualGrocer.Web.Client.ServerAPI"));
 
-builder.Services.AddMsalAuthentication(options =>
-{
-    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-    options.ProviderOptions.DefaultAccessTokenScopes.Add("api://virtual-grocer/chat");
-});
+await builder.LoadConfigurationAndSetupAuthenticationAsync();
 
 await builder.Build().RunAsync();

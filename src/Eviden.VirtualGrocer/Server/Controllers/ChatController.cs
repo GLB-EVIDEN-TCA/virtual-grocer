@@ -7,7 +7,6 @@ using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web.Resource;
 using Eviden.VirtualGrocer.Web.Server.Skills.History;
-using Microsoft.Identity.Client;
 
 namespace Eviden.VirtualGrocer.Web.Server.Controllers
 {
