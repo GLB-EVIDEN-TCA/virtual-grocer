@@ -1,9 +1,7 @@
 using Eviden.VirtualGrocer.Web.Server;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
-using Eviden.VirtualGrocer.Web.Server.Skills.History;
 using Azure.Identity;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,9 +43,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAzureSearch(azureSearchEndpoint!, azureSearchIndex!, azureSearchKey!);
 builder.Services.AddAzureChatCompletion(azureAiEndpoint!, azureAiModel!, azureAiKey!);
-builder.Services.AddSingleton<ITokenCounter, TokenCounter>();
-builder.Services.AddSingleton(sp => new ChatRepository(new MemoryStorageContext<ChatHistory>()));
-builder.Services.AddSingleton(sp => new ResultRepository(new MemoryStorageContext<ResultHistory>()));
 
 var app = builder.Build();
 
@@ -76,4 +71,3 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
-

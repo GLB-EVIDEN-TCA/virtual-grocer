@@ -1,6 +1,6 @@
 ﻿namespace Eviden.VirtualGrocer.Shared.Models
 {
-    public record ChatPrompt(string ChatId)
+    public record ChatPrompt
     {
         public string? Prompt { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Eviden.VirtualGrocer.Shared.Models
 {
-    public record ChatMessage(string ChatId)
+    public record ChatMessage()
     {
 		public string? PreContent { get; set; } = string.Empty;
         public string? ErrorMessage { get; set; } = string.Empty;

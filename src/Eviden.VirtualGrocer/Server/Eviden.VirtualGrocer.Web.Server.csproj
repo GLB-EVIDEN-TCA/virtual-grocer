@@ -8,24 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Skills\Inventory\ItemIntent\config.json" />
     <Content Remove="Skills\Inventory\PersonalShopper\config.json" />
-    <Content Remove="Skills\Inventory\ShoppingList\config.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Skills\Inventory\ItemIntent\skprompt.txt" />
     <None Remove="Skills\Inventory\PersonalShopper\skprompt.txt" />
-    <None Remove="Skills\Inventory\ShoppingList\skprompt.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Skills\Inventory\ItemIntent\config.json" />
-    <EmbeddedResource Include="Skills\Inventory\ItemIntent\skprompt.txt" />
     <EmbeddedResource Include="Skills\Inventory\PersonalShopper\config.json" />
     <EmbeddedResource Include="Skills\Inventory\PersonalShopper\skprompt.txt" />
-    <EmbeddedResource Include="Skills\Inventory\ShoppingList\config.json" />
-    <EmbeddedResource Include="Skills\Inventory\ShoppingList\skprompt.txt" />
   </ItemGroup>
 
   <ItemGroup>
