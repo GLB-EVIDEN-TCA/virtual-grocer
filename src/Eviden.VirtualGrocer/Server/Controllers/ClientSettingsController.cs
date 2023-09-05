@@ -21,7 +21,21 @@ namespace Eviden.VirtualGrocer.Web.Server.Controllers
         [HttpGet]
         public ClientSettings Get()
         {
-            return new ClientSettings { AzureAdAuthority = _config["AzureAd:Authority"], AzureAdClientId = _config["AzureAd:ClientId"] };
+            var authority = _config["AzureAd:Authority"];
+            
+            if (string.IsNullOrEmpty(authority))
+            {
+                throw new ApplicationException("Unable to load AzureAD authority endpoint from configuration.");
+            }
+
+            var clientId = _config["AzureAd:ClientId"];
+
+            if (string.IsNullOrEmpty(clientId))
+            {
+                throw new ApplicationException("Unable to load AzureAD Client Id from configuration.");
+            }
+
+            return new ClientSettings { AzureAdAuthority = authority, AzureAdClientId = clientId };
         }
     }
 }

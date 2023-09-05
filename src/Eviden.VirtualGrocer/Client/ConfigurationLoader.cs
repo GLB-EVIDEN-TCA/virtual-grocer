@@ -27,6 +27,11 @@ namespace Eviden.VirtualGrocer.Web.Client
                 var settingsJson = await response.Content.ReadAsStringAsync();
                 var settings = JsonConvert.DeserializeObject<ClientSettings>(settingsJson);
 
+                if (settings == null)
+                {
+                    throw new ApplicationException("Unable to deserialize client settings from server.");
+                }
+
                 builder.Services.AddMsalAuthentication(options =>
                 {
                     options.ProviderOptions.Authentication.ClientId = settings.AzureAdClientId;
