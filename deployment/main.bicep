@@ -70,6 +70,14 @@ module configurationModule 'configuration.bicep' = {
   }
 }
 
+module ssoModule 'azureSSO.bicep' = {
+  name: '${deployment().name}-sso'
+  params: {
+    webAppName: webAppName
+    location: location
+  }
+}
+
 module storageModule 'storage.bicep' = {
   name: '${deployment().name}-storage'
   params: {
