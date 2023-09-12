@@ -20,10 +20,18 @@ logger.LogInformation(config["Azure:CognitiveSearch:Endpoint"]);
 
 // Register Azure KeyVault
 var keyVaultUri = config["Azure:KeyVault:Uri"];
-config.AddAzureKeyVault(
-    new Uri(keyVaultUri!),
-    new DefaultAzureCredential()
-);
+
+try
+{
+    config.AddAzureKeyVault(
+            new Uri(keyVaultUri!),
+            new DefaultAzureCredential()
+        );
+}
+catch(Exception ex)
+{
+    logger.LogWarning(ex, "Unable to load Azure KeyVault configuration.");
+}
 
 // Register Azure Cognitive and Search services
 var azureAiKey = config["azure-openai-key"];
