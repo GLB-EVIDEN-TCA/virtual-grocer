@@ -35,9 +35,6 @@ resource searchService 'Microsoft.Search/searchServices@2022-09-01' = {
     partitionCount: 1
     hostingMode: 'default'
     publicNetworkAccess: 'enabled'
-    networkRuleSet: {
-      ipRules: []
-    }
     encryptionWithCmk: {
       enforcement: 'Unspecified'
     }
