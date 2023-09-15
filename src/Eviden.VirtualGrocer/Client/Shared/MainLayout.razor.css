@@ -22,7 +22,7 @@ main {
     background-color: #fff;
     border-bottom: 5px solid #ff6d43;
     justify-content: space-between; /* This will space the elements out */
-    height: 4.5rem;
+    height: 5.5rem;
     display: flex;
     align-items: center;
 }
@@ -35,11 +35,15 @@ main {
         white-space: nowrap;
         margin-left: 1.5rem;
         text-decoration: none;
-        color: #0066a1;
+        color: #000;
+        border-bottom: #ff6d43 2px solid;
+        border-radius: 0;
+        padding: 0;
     }
 
     .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
+        color: #000;
+        font-weight: bold;
     }
 
     .top-row ::deep a:first-child {
