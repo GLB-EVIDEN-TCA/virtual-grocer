@@ -28,7 +28,8 @@ main {
 }
 
     .top-row img {
-        height: 40px;
+        padding-top: 5px;
+        height: 80px;
     }    
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
