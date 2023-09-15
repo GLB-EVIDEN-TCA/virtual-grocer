@@ -34,6 +34,7 @@ main {
         white-space: nowrap;
         margin-left: 1.5rem;
         text-decoration: none;
+        color: #0066a1;
     }
 
     .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
