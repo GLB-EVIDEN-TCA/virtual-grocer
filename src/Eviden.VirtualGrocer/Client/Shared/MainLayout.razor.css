@@ -16,6 +16,7 @@ main {
 
 .content {
     color: white;
+    padding-bottom: 10px;
 }
 
 .top-row {
@@ -43,7 +44,6 @@ main {
 
     .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
         color: #000;
-        font-weight: bold;
     }
 
     .top-row ::deep a:first-child {
@@ -90,7 +90,7 @@ main {
     }
 
     .top-row, article {
-        padding-left: 2rem !important;
+        padding-left: 1.5rem !important;
         padding-right: 1.5rem !important;
     }
 }
