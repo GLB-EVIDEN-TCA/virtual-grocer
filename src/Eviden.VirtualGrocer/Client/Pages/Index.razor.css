@@ -52,6 +52,9 @@
   cursor: pointer;
   background-color: transparent;
 }
+.chat-container .chat-messages .chat-message .message-details .inventorycontent button.toggle-recipes:hover, .chat-container .chat-messages .chat-message .message-details .recipecontent button.toggle-recipes:hover {
+  color: #0066a1;
+}
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe {
   margin-bottom: 10px;
 }
@@ -64,10 +67,7 @@
   font-size: 0.7em;
 }
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-name .recipe-url a {
-  color: #000;
   padding: 0.25em;
-  text-decoration: none;
-  border-bottom: 2px solid #ff6d43;
 }
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-description {
   font-style: italic;

@@ -43,7 +43,7 @@ main {
     }
 
     .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        color: #000;
+        color: #0066a1;
     }
 
     .top-row ::deep a:first-child {
