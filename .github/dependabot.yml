@@ -9,7 +9,19 @@ updates:
     directory: "/src/Eviden.VirtualGrocer/Client" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      aspnet:
+        patterns:
+          - "Microsoft.AspNetCore.*"
+          - "Microsoft.Authentication.WebAssembly.Msal"
   - package-ecosystem: "nuget"
     directory: "/src/Eviden.VirtualGrocer/Server"
     schedule:
       interval: "daily"
+    groups:
+      aspnet:
+        patterns:
+          - "Microsoft.AspNetCore.*"
+      identity:
+        patterns:
+          - "Microsoft.Identity.*"
