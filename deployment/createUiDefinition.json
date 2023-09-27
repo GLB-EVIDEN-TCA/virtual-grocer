@@ -1,0 +1,282 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+		"config": {
+			"isWizard": false,
+			"basics": {
+  				"description": "#### ☁️ Deployment Customization for Virtual Grocer Application ☁️\n- 🛠 **Quick Setup**: Create a cloud environment to run the app. \n- 🏷 **Customizable Names**: Choose your own names for the cloud resources you'll be generating. \n- 😌 **Optional**: We have pre-configured names for the resources to be generated, so filling out every field is **not** required. \n",
+				"resourceGroup": {
+					"constraints": {
+						"validations": [
+							{
+								"isValid": "[not(contains(resourceGroup().name, 'test'))]",
+								"message": "Resource group name can't contain 'test'."
+							}
+						]
+					},
+					"allowExisting": true
+				},
+				"location": {
+					"label": "Location",
+					"toolTip": "Pick a location for your resources to exist. These are the only locations in which our OpenAI model is offered.",
+					"allowedValues": [
+						"australiaeast",
+						"canadaeast",
+						"eastus",
+						"eastus2",
+						"francecentral",
+						"japaneast",
+						"northcentralus",
+						"swedencentral",
+						"switzerlandnorth",
+						"uksouth"
+					],
+					"visible": true
+				}
+			}
+		},
+        "basics": [
+			{
+				"name": "resourceBaseName",
+				"type": "Microsoft.Common.TextBox",
+				"label": "Base name for resources",
+				"placeholder": "virtual-grocer",
+				"defaultValue": "[format('virtual-grocer-{0}', uniqueString(resourceGroup().id))]",
+				"toolTip": "Specify a naming prefix for all resources in the application.",
+				"constraints": {
+					"required": false,
+					"regex": "^[a-zA-Z0-9-_]{3,}$",
+					"validationMessage": "Only alphanumeric characters are allowed, and the value must be at least 3 characters long."
+				},
+				"visible": true
+			}
+        ],
+        "steps": [
+            {
+                "name": "parameters",
+                "label": "Resources",
+                "elements": [
+					{
+						"name": "mainResources",
+						"type": "Microsoft.Common.Section",
+						"label": "Main Resources",
+						"elements": [
+							{
+								"name": "keyVaultName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Name of Key Vault",
+								"placeholder": "grocer-vlt",
+								"defaultValue": "[format('grocer-vlt-{0}', uniqueString(resourceGroup().id))]",
+								"toolTip": "Specify a name for the Key Vault used to store client secrets, API keys, etc.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{3,24}$",
+									"validationMessage": "Only alphanumeric characters are allowed, and the value must be 3-24 characters long."
+								},
+								"visible": true,
+								"allowExisting": true
+							},
+							{
+								"name": "storageAccountName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Name of Storage Account",
+								"placeholder": "grocerstor",
+								"defaultValue": "[format('grocerstor{0}', uniqueString(resourceGroup().id))]",
+								"toolTip": "Specify a name for the Storage Account used to store product data.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{3,24}$",
+									"validationMessage": "Name must be 3-24 characters long and can contain only alphanumeric characters."
+								},
+								"visible": true
+							},
+							{
+								"name": "openAIserviceName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Name of the OpenAI service",
+								"placeholder": "grocer-gpt",
+								"defaultValue": "[format('grocer-gpt-{0}', uniqueString(resourceGroup().id))]",
+								"toolTip": "Specify a name for the Azure OpenAI service used to generate dialogue.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{2,64}$",
+									"validationMessage": "Name must be 2-64 characters long and can contain alphanumeric characters, dashes, and underscores."
+								},
+								"visible": true
+							}
+						],
+						"visible": true
+					},
+					{
+						"name": "cogSearch",
+						"type": "Microsoft.Common.Section",
+						"label": "Cognitive Search",
+						"elements": [
+							{
+								"name": "searchServiceName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Name of Cognitive Search service",
+								"placeholder": "product-search",
+								"defaultValue": "[format('product-search-{0}', uniqueString(resourceGroup().id))]",
+								"toolTip": "Specify a name for the Cognitive Search used to search the product data.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{2,60}$",
+									"validationMessage": "The name must be 2-60 characters long and can only contain alphanumeric characters."
+								},
+								"visible": true
+							},
+							{
+								"name": "searchServiceIndexName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Index for Data Storage",
+								"placeholder": "product-inventory",
+								"defaultValue": "product-inventory",
+								"toolTip": "Specify where in the Storage Account the product data should be stored.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{2,60}$",
+									"validationMessage": "The name must be 2-60 characters long and can only contain alphanumeric characters."
+								},
+								"visible": true
+							},
+							{
+								"name": "searchServiceSku",
+								"type": "Microsoft.Common.DropDown",
+								"label": "Tier of the Cognitive Search service",
+								"placeholder": "Basic",
+								"defaultValue": "basic",
+								"toolTip": "Specify the pricing tier of the search service to be created.",
+								"constraints": {
+									"allowedValues": [
+										{
+											"label": "Free",
+											"value": "free"
+										},
+										{
+											"label": "Basic",
+											"value": "basic"
+										},
+										{
+											"label": "Standard",
+											"value": "standard"
+										},
+										{
+											"label": "Standard 2",
+											"value": "standard2"
+										},
+										{
+											"label": "Standard 3",
+											"value": "standard3"
+										},
+										{
+											"label": "Storage Optimized L1",
+											"value": "storage_optimized_l1"
+										},
+										{
+											"label": "Storage Optimized L2",
+											"value": "storage_optimized_l2"
+										}
+									],
+									"required": false
+								},
+								"visible": true
+							}
+						],
+						"visible": true
+					},
+					{
+						"name": "appHosting",
+						"type": "Microsoft.Common.Section",
+						"label": "Hosting the App",
+						"elements": [
+							{
+								"name": "webAppName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Name of the Web App",
+								"defaultValue": "[format('app-{0}', parameters('resourceBaseName'))]",
+								"toolTip": "Specify the name of the Web App.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{2,60}$",
+									"validationMessage": "Name must be 2-60 characters long and can contain alphanumeric characters, dashes, and underscores."
+								},
+								"visible": true
+							},
+							{
+								"name": "appServicePlanName",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Name of the App Service Plan.",
+								"defaultValue": "[format('plan-{0}', parameters('resourceBaseName'))]",
+								"toolTip": "Specify the name of the App Service Plan.",
+								"constraints": {
+									"required": false,
+									"regex": "^[a-zA-Z0-9-_]{2,60}$",
+									"validationMessage": "Name must be 2-60 characters long and can contain alphanumeric characters, dashes, and underscores."
+								},
+								"visible": true
+							},
+							{
+								"name": "appServiceSku",
+								"type": "Microsoft.Common.DropDown",
+								"label": "App Service Plan SKU",
+								"placeholder": "B1",
+								"defaultValue": "B1",
+								"toolTip": "Select the SKU for your App Service Plan",
+								"constraints": {
+									"allowedValues": [
+										{"label": "B1", "value": "B1"},
+										{"label": "B2", "value": "B2"},
+										{"label": "B3", "value": "B3"},
+										{"label": "S1", "value": "S1"},
+										{"label": "S2", "value": "S2"},
+										{"label": "S3", "value": "S3"},
+										{"label": "P1v2", "value": "P1v2"},
+										{"label": "P2v2", "value": "P2v2"},
+										{"label": "P3v2", "value": "P3v2"},
+										{"label": "I1v1", "value": "I1v1"},
+										{"label": "I2v1", "value": "I2v1"},
+										{"label": "I3v1", "value": "I3v1"},
+										{"label": "P0v3", "value": "P0v3"},
+										{"label": "P1v3", "value": "P1v3"},
+										{"label": "I1v2", "value": "I1v2"},
+										{"label": "P2v3", "value": "P2v3"},
+										{"label": "I2v2", "value": "I2v2"},
+										{"label": "P1mv3", "value": "P1mv3"},
+										{"label": "P3v3", "value": "P3v3"},
+										{"label": "I3v2", "value": "I3v2"},
+										{"label": "P2mv3", "value": "P2mv3"},
+										{"label": "I4v2", "value": "I4v2"},
+										{"label": "I5v2", "value": "I5v2"},
+										{"label": "I6v2", "value": "I6v2"},
+										{"label": "P3mv3", "value": "P3mv3"},
+										{"label": "P4mv3", "value": "P4mv3"},
+										{"label": "P5mv3", "value": "P5mv3"}
+									],
+									"required": false
+								},
+								"visible": true
+							}
+						],
+						"visible": true
+					}
+                ]
+            }
+        ],
+        "outputs": {
+			"location": "[location()]",
+			"resourceBaseName": "[basics('resourceBaseName')]",
+			"keyVaultName": "[steps('parameters').mainResources.keyVaultName]",
+			"storageAccountName": "[steps('parameters').mainResources.storageAccountName]",
+			"openAIserviceName": "[steps('parameters').mainResources.openAIserviceName]",
+			"searchServiceName": "[steps('parameters').cogSearch.searchServiceName]",
+			"searchServiceIndexName": "[steps('parameters').cogSearch.searchServiceIndexName]",
+			"searchServiceSku": "[steps('parameters').cogSearch.searchServiceSku]",
+			"webAppName": "[steps('parameters').appHosting.webAppName]",
+			"appServicePlanName": "[steps('parameters').appHosting.appServicePlanName]",
+			"appServiceSku": "[steps('parameters').appHosting.appServiceSku]"
+        }
+    }
+}
