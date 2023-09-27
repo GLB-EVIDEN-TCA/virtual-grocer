@@ -18,12 +18,12 @@
   margin-left: auto;
   padding-right: 0.75rem;
   padding-left: 0.75rem;
-  background-color: #333;
+  background-color: #002d3c;
 }
 .chat-container .chat-messages .chat-message {
-  padding: 10px 25px;
+  padding: 20px 25px 15px;
   margin: 10px 0 10px 0;
-  color: #fff;
+  color: #000;
   border-radius: 20px;
 }
 .chat-container .chat-messages .chat-message .clear {
@@ -37,17 +37,23 @@
   margin-bottom: 10px;
 }
 .chat-container .chat-messages .chat-message .message-details .inventorycontent, .chat-container .chat-messages .chat-message .message-details .recipecontent {
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: bold;
+  margin-bottom: 0.5em;
 }
 .chat-container .chat-messages .chat-message .message-details .inventorycontent button.toggle-recipes, .chat-container .chat-messages .chat-message .message-details .recipecontent button.toggle-recipes {
   font-size: 0.8em;
-  border-radius: 50px;
-  padding: 5px 10px;
+  border-radius: 0px;
+  margin: 5px 10px;
+  padding: 0;
   border: none;
-  color: #8ec7db;
+  border-bottom: 2px solid #ff6d43;
+  color: #000;
   cursor: pointer;
   background-color: transparent;
+}
+.chat-container .chat-messages .chat-message .message-details .inventorycontent button.toggle-recipes:hover, .chat-container .chat-messages .chat-message .message-details .recipecontent button.toggle-recipes:hover {
+  color: #0066a1;
 }
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe {
   margin-bottom: 10px;
@@ -61,11 +67,17 @@
   font-size: 0.7em;
 }
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-name .recipe-url a {
-  color: #8ec7db;
+  padding: 0.25em;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-description {
+  font-style: italic;
 }
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-directions {
   font-weight: bold;
-  margin-top: 10px;
+  margin: 5px 0 20px;
+}
+.chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-directions p{
+  text-decoration: underline;
 }
 .chat-container .chat-messages .chat-message .message-details .recipes .recipe .recipe-directions .recipe-direction {
   font-size: 0.8em;
@@ -79,6 +91,7 @@
   width: 75px;
   height: 75px;
   float: left;
+  border-radius: 10px;
 }
 .chat-container .chat-messages .chat-message .message-details .product .quantity-control {
   float: right;
@@ -89,13 +102,14 @@
 }
 .chat-container .chat-messages .chat-message .message-details .product .quantity-control .quantity-button {
   border: none;
-  background-color: #666;
+  background-color: #002d3c;
   color: #fff;
-  padding: 5px;
+  padding: 5px 11px;
   cursor: pointer;
+  border-radius: 10px;
 }
 .chat-container .chat-messages .chat-message .message-details .product .quantity-control .quantity-button:hover {
-  background-color: #555;
+  background-color: #006878;
 }
 .chat-container .chat-messages .chat-message .message-details .product .quantity-control .quantity-input {
   width: 30px;
@@ -118,20 +132,20 @@
 }
 .chat-container .chat-messages .chat-message .message-details .product .product-info .product-size {
   font-size: 0.8em;
-  color: #ccc;
+  color: #000;
 }
 .chat-container .chat-messages .chat-message .message-details .product .add-to-cart-button {
   float: right;
   border-radius: 50px;
   padding: 10px 20px;
   border: none;
-  color: #fff;
-  background-color: #007BFF;
+  color: #000;
+  background-color: #ff6d43;
   cursor: pointer;
   margin-top: 10px;
 }
 .chat-container .chat-messages .chat-message .message-details .product .add-to-cart-button:hover {
-  background-color: #0056b3;
+  background-color: #df4113;
 }
 .chat-container .chat-messages .chat-message p {
   margin-bottom: 0;
@@ -141,23 +155,25 @@
   height: 50px;
   float: left;
   margin-right: 15px;
+  border-radius: 10px;
 }
 .chat-container .chat-messages .chat-message.user-message {
-  background-color: #333;
+  background-color: #002d3c;
+  color: #eee;
 }
 .chat-container .chat-messages .chat-message.bot-message {
-  background-color: #666;
+  background-color: #ececed;
 }
 .chat-container .chat-input {
   width: 100%;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 .chat-container .chat-input textarea {
   max-height: 200px;
   width: 100%;
   padding: 10px;
-  background-color: #444;
-  color: #fff;
+  background-color: #d0ccc3;
+  color: #000;
   border: none;
   resize: none;
   border-radius: 20px;
@@ -166,8 +182,8 @@
   border-radius: 50px;
   padding: 5px 10px;
   border: none;
-  color: #fff;
-  background-color: #666;
+  color: #000;
+  background-color: #ff6d43;
   cursor: pointer;
 }
 .chat-container .chat-input .cancel-prompt-button.disabled, .chat-container .chat-input .send-prompt-button.disabled, .chat-container .chat-input .clear-prompt-button.disabled {
@@ -180,21 +196,21 @@
   color: #777;
 }
 .chat-container .chat-input .cancel-prompt-button:hover, .chat-container .chat-input .send-prompt-button:hover, .chat-container .chat-input .clear-prompt-button:hover {
-  background-color: #555;
+  background-color: #ff9fad;
 }
 .chat-container .chat-input .clear-prompt-button {
-  background-color: lightyellow;
+  background-color: #ececed;
   color: #000;
 }
 .chat-container .chat-input .clear-prompt-button:hover {
-  background-color: palegoldenrod;
+  background-color: #f2dbe3;
 }
 .chat-container .chat-input .cancel-prompt-button {
-  background-color: transparent;
+  background-color: #fff;
 }
 .chat-container .scroll-down-arrow {
   font-size: 24px;
-  color: #333;
+  color: #002d3c;
 }
 .chat-container .scroll-down-arrow.visible {
   display: block;
