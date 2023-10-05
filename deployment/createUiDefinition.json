@@ -133,7 +133,7 @@
 								"type": "Microsoft.Common.TextBox",
 								"label": "Index for Data Storage",
 								"placeholder": "product-inventory",
-								"defaultValue": "product-inventory",
+								"defaultValue": "[format('product-inventory')]",
 								"toolTip": "Specify where in the Storage Account the product data should be stored.",
 								"constraints": {
 									"required": false,
@@ -192,6 +192,20 @@
 						"type": "Microsoft.Common.Section",
 						"label": "Hosting the App",
 						"elements": [
+							{
+								"name": "clientID",
+								"type": "Microsoft.Common.TextBox",
+								"label": "Client ID",
+								"placeholder": "Enter your client ID",
+								"defaultValue": "",
+								"toolTip": "Specify the client ID for the application.",
+								"constraints": {
+								  "required": true,
+								  "regex": "^[a-zA-Z0-9-_]{2,60}$",
+								  "validationMessage": "The client ID must be 2-60 characters long and can only contain alphanumeric characters."
+								},
+								"visible": true
+							},
 							{
 								"name": "webAppName",
 								"type": "Microsoft.Common.TextBox",
