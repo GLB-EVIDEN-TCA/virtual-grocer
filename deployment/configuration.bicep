@@ -16,6 +16,18 @@ param tenantId string = subscription().tenantId
 ])
 param skuName string = 'standard'
 
+resource pid 'Microsoft.Resources/deployments@2022-09-01' = {
+  name: 'pid-0db94253-b4b6-4475-bd85-9ce92a33bd39-partnercenter' // use your generated GUID here
+  properties: {
+    mode: 'Incremental'
+    template: {
+      '$schema': 'https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#'
+      contentVersion: '1.0.0.0'
+      resources: []
+    }
+  }
+}
+
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: keyVaultName
   location: location
