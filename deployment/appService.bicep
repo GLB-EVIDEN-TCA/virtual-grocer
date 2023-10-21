@@ -140,9 +140,6 @@ resource webAppConfiguration 'Microsoft.Web/sites/config@2022-09-01' = {
       }
     ]
     loadBalancing: 'LeastRequests'
-    experiments: {
-      rampUpRules: []
-    }
     autoHealEnabled: false
     vnetRouteAllEnabled: false
     vnetPrivatePortsCount: 0
